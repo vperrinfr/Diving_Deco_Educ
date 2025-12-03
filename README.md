@@ -75,6 +75,9 @@ http://localhost:5173
 
 Pour plus de détails sur l'architecture et l'implémentation :
 
+- **[Architecture du Calculateur](./decompression-calculator-architecture.md)** - Architecture technique complète du système
+- **[Guide d'Implémentation de l'Algorithme Bühlmann](./buhlmann-algorithm-implementation-guide.md)** - Guide détaillé de l'algorithme ZHL-16C
+- **[Design et Maquettes UI](./ui-mockup-and-design.md)** - Spécifications de l'interface utilisateur et maquettes
 - **[Diagramme d'Architecture](./ARCHITECTURE_DIAGRAM.md)** - Diagrammes de flux et architecture du système
 - **[Checklist d'Implémentation](./IMPLEMENTATION_CHECKLIST.md)** - Liste des tâches et fonctionnalités implémentées
 - **[Plan Multi-Niveaux Multi-Gaz](./MULTI_LEVEL_MULTI_GAS_PLAN.md)** - Spécifications détaillées pour les plongées complexes
@@ -373,6 +376,9 @@ http://localhost:5173
 
 For more details on architecture and implementation:
 
+- **[Calculator Architecture](./decompression-calculator-architecture.md)** - Complete technical system architecture
+- **[Bühlmann Algorithm Implementation Guide](./buhlmann-algorithm-implementation-guide.md)** - Detailed ZHL-16C algorithm guide
+- **[UI Design and Mockups](./ui-mockup-and-design.md)** - User interface specifications and mockups
 - **[Architecture Diagram](./ARCHITECTURE_DIAGRAM.md)** - Flow diagrams and system architecture
 - **[Implementation Checklist](./IMPLEMENTATION_CHECKLIST.md)** - List of implemented tasks and features
 - **[Multi-Level Multi-Gas Plan](./MULTI_LEVEL_MULTI_GAS_PLAN.md)** - Detailed specifications for complex dives
