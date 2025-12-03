@@ -71,6 +71,14 @@ npm run dev
 http://localhost:5173
 ```
 
+## 📚 Documentation Technique
+
+Pour plus de détails sur l'architecture et l'implémentation :
+
+- **[Diagramme d'Architecture](./ARCHITECTURE_DIAGRAM.md)** - Diagrammes de flux et architecture du système
+- **[Checklist d'Implémentation](./IMPLEMENTATION_CHECKLIST.md)** - Liste des tâches et fonctionnalités implémentées
+- **[Plan Multi-Niveaux Multi-Gaz](./MULTI_LEVEL_MULTI_GAS_PLAN.md)** - Spécifications détaillées pour les plongées complexes
+
 ## 📦 Scripts Disponibles
 
 ```bash
@@ -360,6 +368,14 @@ npm run dev
 ```
 http://localhost:5173
 ```
+
+## 📚 Technical Documentation
+
+For more details on architecture and implementation:
+
+- **[Architecture Diagram](./ARCHITECTURE_DIAGRAM.md)** - Flow diagrams and system architecture
+- **[Implementation Checklist](./IMPLEMENTATION_CHECKLIST.md)** - List of implemented tasks and features
+- **[Multi-Level Multi-Gas Plan](./MULTI_LEVEL_MULTI_GAS_PLAN.md)** - Detailed specifications for complex dives
 
 ## 📦 Available Scripts
 
