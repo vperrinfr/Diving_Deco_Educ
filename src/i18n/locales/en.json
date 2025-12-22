@@ -1,0 +1,342 @@
+{
+  "home": {
+    "title": "Dive Planner",
+    "subtitle": "Decompression calculator based on Bühlmann ZHL-16C algorithm",
+    "startButton": "Start Planning",
+    "features": {
+      "multiLevel": "Multi-level profiles",
+      "gradientFactors": "Gradient Factors",
+      "multiGas": "Multi-gas (Nitrox, Trimix)"
+    },
+    "disclaimer": {
+      "title": "Warning:",
+      "text": "This tool is for educational purposes only. Always use a certified dive computer and follow proper procedures."
+    }
+  },
+  "calculator": {
+    "title": "Decompression Calculator",
+    "subtitle": "Bühlmann ZHL-16C Algorithm with Gradient Factors",
+    "backButton": "Back to home",
+    "calculating": "Calculating dive profile...",
+    "disclaimer": {
+      "title": "Important Notice",
+      "text": "This calculator is for educational purposes only. Always use certified dive computers and follow proper dive planning procedures. Never dive beyond your training and certification level."
+    },
+    "about": {
+      "title": "About This Calculation",
+      "description": "This dive profile was calculated using the <strong>Bühlmann ZHL-16C</strong> decompression algorithm with gradient factors <strong>{gfLow}/{gfHigh}</strong>.",
+      "features": {
+        "ascentRate": "Ascent rate: 10 meters per minute",
+        "descentRate": "Descent rate: 20 meters per minute",
+        "safetyStop": "Safety stop: 3 minutes at 5 meters (when applicable)",
+        "tissueCompartments": "16 tissue compartments with nitrogen and helium tracking"
+      },
+      "note": "Lower gradient factors (e.g., 30/70) provide more conservative profiles with longer decompression times. Higher gradient factors (e.g., 50/95) are more aggressive with shorter decompression times but higher risk."
+    }
+  },
+  "footer": {
+    "madeWith": "Made with Bob | Bühlmann ZHL-16C Algorithm Implementation",
+    "sourceCode": "View Source Code"
+  },
+  "language": {
+    "french": "French",
+    "english": "English"
+  },
+  "input": {
+    "modeToggle": {
+      "simple": "Simple Mode",
+      "advanced": "Advanced Mode",
+      "simpleHint": "Single depth & gas",
+      "advancedHint": "Multi-level & Multi-gas"
+    },
+    "title": {
+      "simple": "Dive Parameters",
+      "advanced": "Advanced Dive Planning"
+    },
+    "depth": "Depth",
+    "bottomTime": "Bottom Time (minutes)",
+    "gasMix": "Gas Mix",
+    "useCustomGas": "Use custom gas mix",
+    "oxygen": "Oxygen (%)",
+    "nitrogen": "Nitrogen (%)",
+    "helium": "Helium (%)",
+    "gasPercentageError": "Gas percentages must sum to 100% (current: {total}%)",
+    "gradientFactors": "Gradient Factors",
+    "gfLow": "GF Low",
+    "gfHigh": "GF High",
+    "gfPresets": {
+      "conservative": "Conservative",
+      "moderate": "Moderate",
+      "aggressive": "Aggressive"
+    },
+    "calculateButton": {
+      "simple": "Calculate Dive Profile",
+      "advanced": "Calculate Multi-Level Profile"
+    },
+    "units": {
+      "meters": "meters",
+      "feet": "feet"
+    },
+    "sliderLabels": {
+      "min": "min",
+      "max": "max"
+    }
+  },
+  "results": {
+    "title": "Dive Profile Results",
+    "metrics": {
+      "totalDiveTime": "Total Dive Time",
+      "decompressionTime": "Decompression Time",
+      "ndlAtDepth": "NDL at Depth"
+    },
+    "segments": {
+      "title": "Dive Segments",
+      "number": "#",
+      "depth": "Depth",
+      "duration": "Duration",
+      "type": "Type",
+      "gas": "Gas"
+    },
+    "gasSwitches": {
+      "title": "Gas Switches",
+      "depth": "Depth",
+      "from": "From",
+      "to": "To",
+      "reason": "Reason"
+    },
+    "parameters": {
+      "title": "Dive Parameters",
+      "maxDepth": "Max Depth",
+      "bottomTime": "Bottom Time",
+      "gasMix": "Gas Mix",
+      "gradientFactors": "Gradient Factors",
+      "descentRate": "Descent Rate",
+      "ascentRate": "Ascent Rate"
+    },
+    "decompression": {
+      "title": "Decompression Schedule",
+      "noDecoRequired": "No Decompression Required",
+      "noDecoMessage": "This dive is within no-decompression limits",
+      "depth": "Depth",
+      "stopTime": "Stop Time",
+      "runtime": "Runtime",
+      "gas": "Gas"
+    },
+    "empty": {
+      "title": "No Dive Profile Yet",
+      "message": "Enter dive parameters and click \"Calculate Dive Profile\" to see results"
+    },
+    "exportPdf": {
+      "button": "Export to PDF",
+      "generating": "Generating PDF...",
+      "success": "PDF generated successfully",
+      "error": "Error generating PDF",
+      "missingDiverInfo": "Diver information is missing. Do you want to continue without this information?"
+    }
+  },
+  "warnings": {
+    "title": "Warnings & Information",
+    "legend": {
+      "title": "Notification Types",
+      "error": "Error - Immediate risk",
+      "warning": "Warning - Caution advised",
+      "info": "Info - For your information"
+    }
+  },
+  "guide": {
+    "title": "User Guide",
+    "backButton": "Back",
+    "intro": {
+      "title": "Welcome to the Decompression Calculator",
+      "description": "This guide will help you understand how to use the application to safely plan your dives. The calculator uses the Bühlmann ZHL-16C algorithm with Gradient Factors to calculate decompression profiles."
+    },
+    "gettingStarted": {
+      "title": "Getting Started",
+      "step1": {
+        "title": "Access the Calculator",
+        "description": "From the home page, click the \"Start Planning\" button to access the decompression calculator."
+      },
+      "step2": {
+        "title": "Choose Your Mode",
+        "description": "Select Simple mode for a single-depth dive, or Advanced mode for multi-level dives with multiple gases."
+      },
+      "step3": {
+        "title": "Enter Your Parameters",
+        "description": "Fill in the required fields (depth, time, gas) and adjust the Gradient Factors according to your desired level of conservatism."
+      }
+    },
+    "simpleMode": {
+      "title": "Simple Mode",
+      "description": "Simple mode is ideal for constant-depth dives with a single gas mixture.",
+      "depth": {
+        "title": "Depth",
+        "description": "Enter the maximum depth of your dive (1-100 meters). Use the slider to adjust easily."
+      },
+      "bottomTime": {
+        "title": "Bottom Time",
+        "description": "Time spent at maximum depth in minutes (1-200 minutes)."
+      },
+      "gasMix": {
+        "title": "Gas Mix",
+        "description": "Choose from predefined mixes (Air, EAN32, EAN36, EAN40) or create a custom mix."
+      }
+    },
+    "advancedMode": {
+      "title": "Advanced Mode",
+      "description": "Advanced mode allows you to plan complex dives with multiple depth levels and gas switches.",
+      "multiLevel": {
+        "title": "Multi-level Dives",
+        "description": "Add multiple dive segments at different depths with specific durations."
+      },
+      "multiGas": {
+        "title": "Multi-gas",
+        "description": "Configure multiple gas mixes (bottom and decompression) to optimize your dive profile."
+      },
+      "rates": {
+        "title": "Custom Rates",
+        "description": "Adjust descent and ascent rates according to your preferences."
+      }
+    },
+    "gradientFactors": {
+      "title": "Understanding Gradient Factors",
+      "description": "Gradient Factors (GF) control the conservatism level of your decompression profile. They are expressed as GF Low/GF High.",
+      "conservative": {
+        "title": "Conservative",
+        "description": "Safer profiles with longer decompression times. Recommended for beginner divers, difficult conditions, or after an extended break."
+      },
+      "moderate": {
+        "title": "Moderate",
+        "description": "Balance between safety and efficiency. Suitable for most experienced divers in normal conditions."
+      },
+      "aggressive": {
+        "title": "Aggressive",
+        "description": "Shorter decompression times but increased risk. Reserved for very experienced divers in optimal conditions."
+      }
+    },
+    "results": {
+      "title": "Understanding Results",
+      "description": "Once the calculation is complete, you will see several important pieces of information:",
+      "totalTime": {
+        "title": "Total Dive Time",
+        "description": "Total duration of the dive including descent, bottom time, ascent, and all stops."
+      },
+      "decoTime": {
+        "title": "Decompression Time",
+        "description": "Total time spent at decompression stops."
+      },
+      "ndl": {
+        "title": "No Decompression Limit (NDL)",
+        "description": "Maximum time you can spend at this depth without requiring decompression stops."
+      },
+      "decoStops": {
+        "title": "Decompression Stops",
+        "description": "Detailed list of all required stops with their depth, duration, and gas to use."
+      }
+    },
+    "safety": {
+      "title": "⚠️ Important Safety Warning",
+      "description": "This calculator is an educational tool only. It does NOT replace a certified dive computer.",
+      "point1": "Always use a certified dive computer during actual dives",
+      "point2": "Never dive beyond your training and certification level",
+      "point3": "Always consult a qualified professional for technical dive planning",
+      "point4": "Calculations are provided for informational purposes and do not guarantee dive safety"
+    }
+  },
+  "diveSite": {
+    "title": "Dive Site",
+    "subtitle": "Configure your dive site conditions",
+    "backButton": "Back to home",
+    "form": {
+      "siteName": "Site Name",
+      "siteNamePlaceholder": "e.g., Donator Wreck",
+      "waterType": "Water Type",
+      "waterTypes": {
+        "sea": "Sea",
+        "lake": "Lake",
+        "river": "River",
+        "quarry": "Quarry"
+      },
+      "location": "Location",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "address": "Address (optional)",
+      "addressPlaceholder": "e.g., Nice Harbor, France",
+      "altitude": "Altitude",
+      "altitudeUnit": "meters above sea level",
+      "waterTemperature": "Water Temperature",
+      "temperatureUnit": "°C",
+      "useEstimated": "Use estimated temperature",
+      "fetchWeather": "Fetch Weather",
+      "saveSite": "Save Site",
+      "clearForm": "Clear"
+    },
+    "weather": {
+      "title": "Weather Conditions",
+      "loading": "Loading weather data...",
+      "error": "Error loading weather",
+      "lastUpdated": "Last updated",
+      "airTemperature": "Air Temperature",
+      "windSpeed": "Wind Speed",
+      "windDirection": "Wind Direction",
+      "waveHeight": "Wave Height",
+      "precipitation": "Precipitation",
+      "cloudCover": "Cloud Cover",
+      "pressure": "Atmospheric Pressure",
+      "humidity": "Humidity",
+      "conditions": "Conditions",
+      "notAvailable": "Not available"
+    },
+    "current": {
+      "title": "Current Conditions",
+      "speed": "Current Speed",
+      "direction": "Current Direction",
+      "knots": "knots"
+    },
+    "savedSites": {
+      "title": "Saved Sites",
+      "empty": "No saved sites",
+      "load": "Load",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this site?"
+    },
+    "info": {
+      "title": "Information",
+      "altitudeEffect": "Altitude affects decompression calculations. High-altitude sites require adjustments.",
+      "waterTempEffect": "Water temperature influences air consumption and diver comfort.",
+      "weatherSource": "Weather data provided by Open-Meteo (open-source API)"
+    },
+    "validation": {
+      "nameRequired": "Site name is required",
+      "invalidLatitude": "Invalid latitude (-90 to 90)",
+      "invalidLongitude": "Invalid longitude (-180 to 180)",
+      "invalidAltitude": "Invalid altitude",
+      "invalidTemperature": "Invalid temperature"
+    }
+  },
+  "diverInfo": {
+    "title": "Diver Information",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Enter your last name",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "+1 555 123 4567",
+    "padiNumber": "PADI Number",
+    "padiNumberPlaceholder": "e.g., 1234567",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "close": "Close",
+    "requiredFields": "* Required fields",
+    "validation": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Invalid phone format",
+      "padiRequired": "PADI number is required"
+    },
+    "error": {
+      "saveFailed": "Error saving information"
+    }
+  }
+}

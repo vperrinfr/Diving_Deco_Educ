@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Diver information (sensitive data)
+diver.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

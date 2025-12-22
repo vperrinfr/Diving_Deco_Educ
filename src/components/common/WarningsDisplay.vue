@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
 import type { Warning } from '../../types';
 import { WarningLevel } from '../../types';
 
 defineProps<{
   warnings: Warning[];
 }>();
+
+const { t } = useI18n();
 
 const getNotificationKind = (level: string) => {
   switch (level) {
@@ -45,7 +48,7 @@ const getNotificationIcon = (level: string) => {
 
 <template>
   <div v-if="warnings.length > 0" class="cds--tile warnings-container">
-    <h3 class="cds--type-heading-03 cds--spacing-05 warnings-title">Warnings & Information</h3>
+    <h3 class="cds--type-heading-03 cds--spacing-05 warnings-title">{{ t('warnings.title') }}</h3>
     
     <div class="notifications-list">
       <div
@@ -58,7 +61,7 @@ const getNotificationIcon = (level: string) => {
         role="alert"
       >
         <div class="cds--inline-notification__details">
-          <div 
+          <div
             class="cds--inline-notification__icon"
             v-html="getNotificationIcon(warning.level)"
           ></div>
@@ -76,19 +79,19 @@ const getNotificationIcon = (level: string) => {
 
     <!-- Warning Legend -->
     <div class="warning-legend">
-      <h4 class="cds--type-label-01">Notification Types</h4>
+      <h4 class="cds--type-label-01">{{ t('warnings.legend.title') }}</h4>
       <div class="legend-items">
         <div class="legend-item">
           <div class="legend-indicator legend-indicator--error"></div>
-          <span class="legend-text">Error - Immediate risk</span>
+          <span class="legend-text">{{ t('warnings.legend.error') }}</span>
         </div>
         <div class="legend-item">
           <div class="legend-indicator legend-indicator--warning"></div>
-          <span class="legend-text">Warning - Caution advised</span>
+          <span class="legend-text">{{ t('warnings.legend.warning') }}</span>
         </div>
         <div class="legend-item">
           <div class="legend-indicator legend-indicator--info"></div>
-          <span class="legend-text">Info - For your information</span>
+          <span class="legend-text">{{ t('warnings.legend.info') }}</span>
         </div>
       </div>
     </div>

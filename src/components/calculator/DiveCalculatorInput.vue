@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { DiveParameters, GasMix, MultiLevelDiveParameters, GasInventory, DiveSegment } from '../../types';
 import { PREDEFINED_GASES } from '../../types';
 import { DESCENT_RATE, ASCENT_RATE } from '../../utils/buhlmann/constants';
@@ -10,6 +11,8 @@ import RateConfiguration from './RateConfiguration.vue';
 const emit = defineEmits<{
   calculate: [parameters: DiveParameters | MultiLevelDiveParameters]
 }>();
+
+const { t } = useI18n();
 
 // Mode toggle
 const isAdvancedMode = ref(false);
@@ -61,7 +64,7 @@ const gasPercentageError = computed(() => {
   if (!useCustomGas.value) return '';
   const total = customOxygen.value + customNitrogen.value + customHelium.value;
   if (Math.abs(total - 100) > 0.1) {
-    return `Gas percentages must sum to 100% (current: ${total.toFixed(1)}%)`;
+    return t('input.gasPercentageError', { total: total.toFixed(1) });
   }
   return '';
 });
@@ -138,17 +141,17 @@ const toggleMode = () => {
       >
         <span class="mode-icon">{{ isAdvancedMode ? '⚙️' : '📊' }}</span>
         <span class="mode-text">
-          {{ isAdvancedMode ? 'Advanced Mode' : 'Simple Mode' }}
+          {{ isAdvancedMode ? t('input.modeToggle.advanced') : t('input.modeToggle.simple') }}
         </span>
         <span class="mode-hint">
-          {{ isAdvancedMode ? 'Multi-level & Multi-gas' : 'Single depth & gas' }}
+          {{ isAdvancedMode ? t('input.modeToggle.advancedHint') : t('input.modeToggle.simpleHint') }}
         </span>
       </button>
     </div>
 
     <div class="cds--tile cds--tile--light">
       <h3 class="cds--type-heading-03 cds--spacing-05">
-        {{ isAdvancedMode ? 'Advanced Dive Planning' : 'Dive Parameters' }}
+        {{ isAdvancedMode ? t('input.title.advanced') : t('input.title.simple') }}
       </h3>
       
       <div class="cds--form cds--spacing-05">
@@ -157,7 +160,7 @@ const toggleMode = () => {
           <!-- Depth Input -->
           <div class="cds--form-item cds--spacing-05">
             <label class="cds--label">
-              Depth ({{ units === 'metric' ? 'meters' : 'feet' }})
+              {{ t('input.depth') }} ({{ units === 'metric' ? t('input.units.meters') : t('input.units.feet') }})
             </label>
             <input
               v-model.number="depth"
@@ -175,8 +178,8 @@ const toggleMode = () => {
                 class="cds--slider"
               />
               <div class="cds--slider__range-label">
-                <span>1m</span>
-                <span>100m</span>
+                <span>1{{ units === 'metric' ? 'm' : 'ft' }}</span>
+                <span>100{{ units === 'metric' ? 'm' : 'ft' }}</span>
               </div>
             </div>
           </div>
@@ -184,7 +187,7 @@ const toggleMode = () => {
           <!-- Bottom Time Input -->
           <div class="cds--form-item cds--spacing-05">
             <label class="cds--label">
-              Bottom Time (minutes)
+              {{ t('input.bottomTime') }}
             </label>
             <input
               v-model.number="bottomTime"
@@ -202,15 +205,15 @@ const toggleMode = () => {
                 class="cds--slider"
               />
               <div class="cds--slider__range-label">
-                <span>1min</span>
-                <span>200min</span>
+                <span>1{{ t('input.sliderLabels.min') }}</span>
+                <span>200{{ t('input.sliderLabels.min') }}</span>
               </div>
             </div>
           </div>
 
           <!-- Gas Mix Selection -->
           <div class="cds--form-item cds--spacing-05">
-            <label class="cds--label">Gas Mix</label>
+            <label class="cds--label">{{ t('input.gasMix') }}</label>
             
             <div class="cds--checkbox-wrapper cds--spacing-03">
               <input
@@ -220,7 +223,7 @@ const toggleMode = () => {
                 class="cds--checkbox"
               />
               <label for="customGas" class="cds--checkbox-label">
-                <span class="cds--checkbox-label-text">Use custom gas mix</span>
+                <span class="cds--checkbox-label-text">{{ t('input.useCustomGas') }}</span>
               </label>
             </div>
 
@@ -238,7 +241,7 @@ const toggleMode = () => {
 
             <div v-else class="cds--spacing-03">
               <div class="cds--form-item">
-                <label class="cds--label">Oxygen (%)</label>
+                <label class="cds--label">{{ t('input.oxygen') }}</label>
                 <input
                   v-model.number="customOxygen"
                   @input="handleOxygenChange"
@@ -250,7 +253,7 @@ const toggleMode = () => {
                 />
               </div>
               <div class="cds--form-item cds--spacing-03">
-                <label class="cds--label">Nitrogen (%)</label>
+                <label class="cds--label">{{ t('input.nitrogen') }}</label>
                 <input
                   v-model.number="customNitrogen"
                   type="number"
@@ -261,7 +264,7 @@ const toggleMode = () => {
                 />
               </div>
               <div class="cds--form-item cds--spacing-03">
-                <label class="cds--label">Helium (%)</label>
+                <label class="cds--label">{{ t('input.helium') }}</label>
                 <input
                   v-model.number="customHelium"
                   type="number"
@@ -300,11 +303,11 @@ const toggleMode = () => {
 
         <!-- Gradient Factors (Common) -->
         <div class="cds--form-item cds--spacing-05">
-          <h4 class="cds--type-heading-02 cds--spacing-03">Gradient Factors</h4>
+          <h4 class="cds--type-heading-02 cds--spacing-03">{{ t('input.gradientFactors') }}</h4>
           
           <div class="cds--form-item cds--spacing-03">
             <label class="cds--label">
-              GF Low: {{ gradientFactorLow }}%
+              {{ t('input.gfLow') }}: {{ gradientFactorLow }}%
             </label>
             <div class="slider-container">
               <input
@@ -323,7 +326,7 @@ const toggleMode = () => {
 
           <div class="cds--form-item cds--spacing-03">
             <label class="cds--label">
-              GF High: {{ gradientFactorHigh }}%
+              {{ t('input.gfHigh') }}: {{ gradientFactorHigh }}%
             </label>
             <div class="slider-container">
               <input
@@ -342,7 +345,7 @@ const toggleMode = () => {
 
           <div class="cds--tile cds--tile--info cds--spacing-03">
             <p class="cds--type-body-compact-01">
-              <strong>Conservative:</strong> 30/70 | <strong>Moderate:</strong> 40/85 | <strong>Aggressive:</strong> 50/95
+              <strong>{{ t('input.gfPresets.conservative') }}:</strong> 30/70 | <strong>{{ t('input.gfPresets.moderate') }}:</strong> 40/85 | <strong>{{ t('input.gfPresets.aggressive') }}:</strong> 50/95
             </p>
           </div>
         </div>
@@ -353,7 +356,7 @@ const toggleMode = () => {
           :disabled="!canCalculate"
           class="cds--btn cds--btn--primary cds--btn--full-width cds--spacing-05"
         >
-          {{ isAdvancedMode ? 'Calculate Multi-Level Profile' : 'Calculate Dive Profile' }}
+          {{ isAdvancedMode ? t('input.calculateButton.advanced') : t('input.calculateButton.simple') }}
         </button>
       </div>
     </div>

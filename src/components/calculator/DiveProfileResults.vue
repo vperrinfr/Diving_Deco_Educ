@@ -1,11 +1,54 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { DiveProfile } from '../../types';
 import { isMultiLevelDive } from '../../types';
 import { formatGasMix } from '../../utils/gasMix';
+import { generateDivePlanPDF } from '../../services/pdfExportService';
+import { useDiveSiteStore } from '../../stores/diveSiteStore';
+
+const { t } = useI18n();
+const diveSiteStore = useDiveSiteStore();
 
 defineProps<{
   profile: DiveProfile | null;
 }>();
+
+const isExporting = ref(false);
+
+const handleExportPDF = async (profile: DiveProfile) => {
+  isExporting.value = true;
+  
+  try {
+    // Récupérer les informations du plongeur depuis localStorage
+    let diverInfo = null;
+    const savedDiverInfo = localStorage.getItem('diver-info');
+    if (savedDiverInfo) {
+      diverInfo = JSON.parse(savedDiverInfo);
+    } else {
+      // Demander confirmation si les infos du plongeur sont manquantes
+      const proceed = confirm(t('results.exportPdf.missingDiverInfo'));
+      if (!proceed) {
+        isExporting.value = false;
+        return;
+      }
+    }
+    
+    // Générer le PDF avec toutes les données disponibles
+    generateDivePlanPDF({
+      profile,
+      diverInfo,
+      diveSite: diveSiteStore.currentSite || undefined,
+      weather: diveSiteStore.weatherConditions || undefined
+    });
+    
+  } catch (error) {
+    console.error('Error generating PDF:', error);
+    alert(t('results.exportPdf.error'));
+  } finally {
+    isExporting.value = false;
+  }
+};
 
 const formatTime = (minutes: number): string => {
   const hours = Math.floor(minutes / 60);
@@ -26,28 +69,44 @@ const formatDepth = (depth: number, units: 'metric' | 'imperial'): string => {
 
 <template>
   <div v-if="profile" class="cds--tile">
-    <h3 class="cds--type-heading-03 cds--spacing-05 results-title">Dive Profile Results</h3>
+    <div class="results-header">
+      <h3 class="cds--type-heading-03 results-title">{{ t('results.title') }}</h3>
+      <button
+        @click="handleExportPDF(profile)"
+        :disabled="isExporting"
+        class="export-pdf-button"
+        :title="t('results.exportPdf.button')"
+      >
+        <svg v-if="!isExporting" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M15 7h-3V1H8v6H5l5 5 5-5zM4 17v2h12v-2H4z"/>
+        </svg>
+        <svg v-else class="spinner" width="20" height="20" viewBox="0 0 20 20">
+          <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="50" stroke-dashoffset="25"/>
+        </svg>
+        <span>{{ isExporting ? t('results.exportPdf.generating') : t('results.exportPdf.button') }}</span>
+      </button>
+    </div>
 
     <!-- Summary Cards -->
     <div class="cds--grid cds--grid--narrow cds--spacing-05">
       <div class="cds--row">
         <div class="cds--col-lg-4 cds--col-md-4 cds--col-sm-4">
           <div class="cds--tile cds--tile--clickable metric-card metric-card--blue">
-            <div class="metric-card__label">Total Dive Time</div>
+            <div class="metric-card__label">{{ t('results.metrics.totalDiveTime') }}</div>
             <div class="metric-card__value">{{ formatTime(profile.totalDiveTime) }}</div>
           </div>
         </div>
 
         <div class="cds--col-lg-4 cds--col-md-4 cds--col-sm-4">
           <div class="cds--tile cds--tile--clickable metric-card metric-card--purple">
-            <div class="metric-card__label">Decompression Time</div>
+            <div class="metric-card__label">{{ t('results.metrics.decompressionTime') }}</div>
             <div class="metric-card__value">{{ formatTime(profile.totalDecompressionTime) }}</div>
           </div>
         </div>
 
         <div class="cds--col-lg-4 cds--col-md-4 cds--col-sm-4">
           <div class="cds--tile cds--tile--clickable metric-card metric-card--green">
-            <div class="metric-card__label">NDL at Depth</div>
+            <div class="metric-card__label">{{ t('results.metrics.ndlAtDepth') }}</div>
             <div class="metric-card__value">{{ formatTime(profile.noDecompressionLimit) }}</div>
           </div>
         </div>
@@ -56,16 +115,16 @@ const formatDepth = (depth: number, units: 'metric' | 'imperial'): string => {
 
     <!-- Multi-Level Dive Segments (if applicable) -->
     <div v-if="profile.segments && profile.segments.length > 0" class="cds--spacing-06">
-      <h4 class="cds--type-heading-02 cds--spacing-03 section-heading">Dive Segments</h4>
+      <h4 class="cds--type-heading-02 cds--spacing-03 section-heading">{{ t('results.segments.title') }}</h4>
       <div class="cds--data-table-container">
         <table class="cds--data-table cds--data-table--compact">
           <thead>
             <tr>
-              <th class="cds--table-header">#</th>
-              <th class="cds--table-header">Depth</th>
-              <th class="cds--table-header">Duration</th>
-              <th class="cds--table-header">Type</th>
-              <th class="cds--table-header">Gas</th>
+              <th class="cds--table-header">{{ t('results.segments.number') }}</th>
+              <th class="cds--table-header">{{ t('results.segments.depth') }}</th>
+              <th class="cds--table-header">{{ t('results.segments.duration') }}</th>
+              <th class="cds--table-header">{{ t('results.segments.type') }}</th>
+              <th class="cds--table-header">{{ t('results.segments.gas') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -91,15 +150,15 @@ const formatDepth = (depth: number, units: 'metric' | 'imperial'): string => {
 
     <!-- Gas Switches (if applicable) -->
     <div v-if="profile.gasSwitches && profile.gasSwitches.length > 0" class="cds--spacing-06">
-      <h4 class="cds--type-heading-02 cds--spacing-03 section-heading">Gas Switches</h4>
+      <h4 class="cds--type-heading-02 cds--spacing-03 section-heading">{{ t('results.gasSwitches.title') }}</h4>
       <div class="cds--data-table-container">
         <table class="cds--data-table cds--data-table--compact">
           <thead>
             <tr>
-              <th class="cds--table-header">Depth</th>
-              <th class="cds--table-header">From</th>
-              <th class="cds--table-header">To</th>
-              <th class="cds--table-header">Reason</th>
+              <th class="cds--table-header">{{ t('results.gasSwitches.depth') }}</th>
+              <th class="cds--table-header">{{ t('results.gasSwitches.from') }}</th>
+              <th class="cds--table-header">{{ t('results.gasSwitches.to') }}</th>
+              <th class="cds--table-header">{{ t('results.gasSwitches.reason') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -126,34 +185,34 @@ const formatDepth = (depth: number, units: 'metric' | 'imperial'): string => {
 
     <!-- Dive Parameters Summary -->
     <div class="cds--spacing-06">
-      <h4 class="cds--type-heading-02 cds--spacing-03 section-heading">Dive Parameters</h4>
+      <h4 class="cds--type-heading-02 cds--spacing-03 section-heading">{{ t('results.parameters.title') }}</h4>
       <div class="cds--structured-list">
         <div class="cds--structured-list-row">
-          <div class="cds--structured-list-td">Max Depth:</div>
+          <div class="cds--structured-list-td">{{ t('results.parameters.maxDepth') }}:</div>
           <div class="cds--structured-list-td"><strong>{{ formatDepth(profile.maxDepth, profile.parameters.units) }}</strong></div>
         </div>
         <div v-if="!isMultiLevelDive(profile.parameters)" class="cds--structured-list-row">
-          <div class="cds--structured-list-td">Bottom Time:</div>
+          <div class="cds--structured-list-td">{{ t('results.parameters.bottomTime') }}:</div>
           <div class="cds--structured-list-td"><strong>{{ profile.parameters.bottomTime }} min</strong></div>
         </div>
         <div v-if="!isMultiLevelDive(profile.parameters)" class="cds--structured-list-row">
-          <div class="cds--structured-list-td">Gas Mix:</div>
+          <div class="cds--structured-list-td">{{ t('results.parameters.gasMix') }}:</div>
           <div class="cds--structured-list-td">
             <strong>{{ profile.parameters.gasMix.name || 'Custom' }} ({{ Math.round(profile.parameters.gasMix.oxygen * 100) }}% O₂)</strong>
           </div>
         </div>
         <div class="cds--structured-list-row">
-          <div class="cds--structured-list-td">Gradient Factors:</div>
+          <div class="cds--structured-list-td">{{ t('results.parameters.gradientFactors') }}:</div>
           <div class="cds--structured-list-td">
             <strong>{{ profile.parameters.gradientFactorLow }}/{{ profile.parameters.gradientFactorHigh }}</strong>
           </div>
         </div>
         <div v-if="isMultiLevelDive(profile.parameters)" class="cds--structured-list-row">
-          <div class="cds--structured-list-td">Descent Rate:</div>
+          <div class="cds--structured-list-td">{{ t('results.parameters.descentRate') }}:</div>
           <div class="cds--structured-list-td"><strong>{{ profile.parameters.descentRate }} m/min</strong></div>
         </div>
         <div v-if="isMultiLevelDive(profile.parameters)" class="cds--structured-list-row">
-          <div class="cds--structured-list-td">Ascent Rate:</div>
+          <div class="cds--structured-list-td">{{ t('results.parameters.ascentRate') }}:</div>
           <div class="cds--structured-list-td"><strong>{{ profile.parameters.ascentRate }} m/min</strong></div>
         </div>
       </div>
@@ -161,7 +220,7 @@ const formatDepth = (depth: number, units: 'metric' | 'imperial'): string => {
 
     <!-- Decompression Stops -->
     <div class="cds--spacing-06">
-      <h4 class="cds--type-heading-02 cds--spacing-03 section-heading">Decompression Schedule</h4>
+      <h4 class="cds--type-heading-02 cds--spacing-03 section-heading">{{ t('results.decompression.title') }}</h4>
       
       <div v-if="profile.decompressionStops.length === 0" class="cds--tile cds--tile--success">
         <div class="success-message">
@@ -169,8 +228,8 @@ const formatDepth = (depth: number, units: 'metric' | 'imperial'): string => {
             <path d="M16 2C8.3 2 2 8.3 2 16s6.3 14 14 14 14-6.3 14-14S23.7 2 16 2zm-2 21.2L6.8 16l1.4-1.4L14 20.4l9.8-9.8 1.4 1.4L14 23.2z" fill="currentColor"/>
           </svg>
           <div>
-            <p class="cds--type-heading-01">No Decompression Required</p>
-            <p class="cds--type-body-compact-01">This dive is within no-decompression limits</p>
+            <p class="cds--type-heading-01">{{ t('results.decompression.noDecoRequired') }}</p>
+            <p class="cds--type-body-compact-01">{{ t('results.decompression.noDecoMessage') }}</p>
           </div>
         </div>
       </div>
@@ -179,10 +238,10 @@ const formatDepth = (depth: number, units: 'metric' | 'imperial'): string => {
         <table class="cds--data-table cds--data-table--compact">
           <thead>
             <tr>
-              <th class="cds--table-header">Depth</th>
-              <th class="cds--table-header">Stop Time</th>
-              <th class="cds--table-header">Runtime</th>
-              <th class="cds--table-header">Gas</th>
+              <th class="cds--table-header">{{ t('results.decompression.depth') }}</th>
+              <th class="cds--table-header">{{ t('results.decompression.stopTime') }}</th>
+              <th class="cds--table-header">{{ t('results.decompression.runtime') }}</th>
+              <th class="cds--table-header">{{ t('results.decompression.gas') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -209,8 +268,8 @@ const formatDepth = (depth: number, units: 'metric' | 'imperial'): string => {
     <svg class="empty-state__icon" width="80" height="80" viewBox="0 0 32 32">
       <path d="M25 5h-3V4a2 2 0 00-2-2h-8a2 2 0 00-2 2v1H7a2 2 0 00-2 2v21a2 2 0 002 2h18a2 2 0 002-2V7a2 2 0 00-2-2zM12 4h8v1h-8zm13 24H7V7h3v1a1 1 0 001 1h10a1 1 0 001-1V7h3z" fill="currentColor"/>
     </svg>
-    <h3 class="cds--type-heading-02">No Dive Profile Yet</h3>
-    <p class="cds--type-body-compact-01">Enter dive parameters and click "Calculate Dive Profile" to see results</p>
+    <h3 class="cds--type-heading-02">{{ t('results.empty.title') }}</h3>
+    <p class="cds--type-body-compact-01">{{ t('results.empty.message') }}</p>
   </div>
 </template>
 
@@ -467,5 +526,75 @@ const formatDepth = (depth: number, units: 'metric' | 'imperial'): string => {
   font-size: 0.75rem;
   line-height: 1.33333;
   color: #6f6f6f;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.export-pdf-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #0f62fe;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+}
+
+.export-pdf-button:hover:not(:disabled) {
+  background: #0353e9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.export-pdf-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.export-pdf-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.export-pdf-button svg {
+  flex-shrink: 0;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .results-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .export-pdf-button {
+    width: 100%;
+    justify-content: center;
+  }
 }
 </style>

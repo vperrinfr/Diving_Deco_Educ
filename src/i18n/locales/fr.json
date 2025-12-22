@@ -1,0 +1,342 @@
+{
+  "home": {
+    "title": "Planificateur de plongée",
+    "subtitle": "Calculateur de décompression basé sur l'algorithme Bühlmann ZHL-16C",
+    "startButton": "Commencer la planification",
+    "features": {
+      "multiLevel": "Profils multi-niveaux",
+      "gradientFactors": "Gradient Factors",
+      "multiGas": "Multi-gaz (Nitrox, Trimix)"
+    },
+    "disclaimer": {
+      "title": "Avertissement :",
+      "text": "Cet outil est à usage éducatif uniquement. Utilisez toujours un ordinateur de plongée certifié et suivez les procédures appropriées."
+    }
+  },
+  "calculator": {
+    "title": "Calculateur de décompression",
+    "subtitle": "Algorithme Bühlmann ZHL-16C avec Gradient Factors",
+    "backButton": "Retour à l'accueil",
+    "calculating": "Calcul du profil de plongée...",
+    "disclaimer": {
+      "title": "Avis important",
+      "text": "Ce calculateur est à usage éducatif uniquement. Utilisez toujours des ordinateurs de plongée certifiés et suivez les procédures de planification appropriées. Ne plongez jamais au-delà de votre niveau de formation et de certification."
+    },
+    "about": {
+      "title": "À propos de ce calcul",
+      "description": "Ce profil de plongée a été calculé en utilisant l'algorithme de décompression <strong>Bühlmann ZHL-16C</strong> avec des gradient factors <strong>{gfLow}/{gfHigh}</strong>.",
+      "features": {
+        "ascentRate": "Vitesse de remontée : 10 mètres par minute",
+        "descentRate": "Vitesse de descente : 20 mètres par minute",
+        "safetyStop": "Palier de sécurité : 3 minutes à 5 mètres (si applicable)",
+        "tissueCompartments": "16 compartiments tissulaires avec suivi de l'azote et de l'hélium"
+      },
+      "note": "Des gradient factors plus bas (ex: 30/70) fournissent des profils plus conservateurs avec des temps de décompression plus longs. Des gradient factors plus élevés (ex: 50/95) sont plus agressifs avec des temps de décompression plus courts mais un risque plus élevé."
+    }
+  },
+  "footer": {
+    "madeWith": "Créé avec Bob | Implémentation de l'algorithme Bühlmann ZHL-16C",
+    "sourceCode": "Voir le code source"
+  },
+  "language": {
+    "french": "Français",
+    "english": "Anglais"
+  },
+  "input": {
+    "modeToggle": {
+      "simple": "Mode Simple",
+      "advanced": "Mode Avancé",
+      "simpleHint": "Profondeur et gaz uniques",
+      "advancedHint": "Multi-niveaux & Multi-gaz"
+    },
+    "title": {
+      "simple": "Paramètres de plongée",
+      "advanced": "Planification avancée de plongée"
+    },
+    "depth": "Profondeur",
+    "bottomTime": "Temps de fond (minutes)",
+    "gasMix": "Mélange gazeux",
+    "useCustomGas": "Utiliser un mélange personnalisé",
+    "oxygen": "Oxygène (%)",
+    "nitrogen": "Azote (%)",
+    "helium": "Hélium (%)",
+    "gasPercentageError": "Les pourcentages de gaz doivent totaliser 100% (actuel: {total}%)",
+    "gradientFactors": "Gradient Factors",
+    "gfLow": "GF Bas",
+    "gfHigh": "GF Haut",
+    "gfPresets": {
+      "conservative": "Conservateur",
+      "moderate": "Modéré",
+      "aggressive": "Agressif"
+    },
+    "calculateButton": {
+      "simple": "Calculer le profil de plongée",
+      "advanced": "Calculer le profil multi-niveaux"
+    },
+    "units": {
+      "meters": "mètres",
+      "feet": "pieds"
+    },
+    "sliderLabels": {
+      "min": "min",
+      "max": "max"
+    }
+  },
+  "results": {
+    "title": "Résultats du profil de plongée",
+    "metrics": {
+      "totalDiveTime": "Temps total de plongée",
+      "decompressionTime": "Temps de décompression",
+      "ndlAtDepth": "Limite sans palier à la profondeur"
+    },
+    "segments": {
+      "title": "Segments de plongée",
+      "number": "#",
+      "depth": "Profondeur",
+      "duration": "Durée",
+      "type": "Type",
+      "gas": "Gaz"
+    },
+    "gasSwitches": {
+      "title": "Changements de gaz",
+      "depth": "Profondeur",
+      "from": "De",
+      "to": "Vers",
+      "reason": "Raison"
+    },
+    "parameters": {
+      "title": "Paramètres de plongée",
+      "maxDepth": "Profondeur maximale",
+      "bottomTime": "Temps de fond",
+      "gasMix": "Mélange gazeux",
+      "gradientFactors": "Gradient Factors",
+      "descentRate": "Vitesse de descente",
+      "ascentRate": "Vitesse de remontée"
+    },
+    "decompression": {
+      "title": "Programme de décompression",
+      "noDecoRequired": "Aucune décompression requise",
+      "noDecoMessage": "Cette plongée est dans les limites sans palier",
+      "depth": "Profondeur",
+      "stopTime": "Temps de palier",
+      "runtime": "Temps cumulé",
+      "gas": "Gaz"
+    },
+    "empty": {
+      "title": "Aucun profil de plongée",
+      "message": "Entrez les paramètres de plongée et cliquez sur \"Calculer le profil de plongée\" pour voir les résultats"
+    },
+    "exportPdf": {
+      "button": "Exporter en PDF",
+      "generating": "Génération du PDF...",
+      "success": "PDF généré avec succès",
+      "error": "Erreur lors de la génération du PDF",
+      "missingDiverInfo": "Informations du plongeur manquantes. Voulez-vous continuer sans ces informations ?"
+    }
+  },
+  "warnings": {
+    "title": "Avertissements et informations",
+    "legend": {
+      "title": "Types de notification",
+      "error": "Erreur - Risque immédiat",
+      "warning": "Avertissement - Prudence conseillée",
+      "info": "Info - Pour votre information"
+    }
+  },
+  "guide": {
+    "title": "Guide utilisateur",
+    "backButton": "Retour",
+    "intro": {
+      "title": "Bienvenue dans le calculateur de décompression",
+      "description": "Ce guide vous aidera à comprendre comment utiliser l'application pour planifier vos plongées en toute sécurité. Le calculateur utilise l'algorithme Bühlmann ZHL-16C avec Gradient Factors pour calculer les profils de décompression."
+    },
+    "gettingStarted": {
+      "title": "Premiers pas",
+      "step1": {
+        "title": "Accédez au calculateur",
+        "description": "Depuis la page d'accueil, cliquez sur le bouton \"Commencer la planification\" pour accéder au calculateur de décompression."
+      },
+      "step2": {
+        "title": "Choisissez votre mode",
+        "description": "Sélectionnez le mode Simple pour une plongée à profondeur unique, ou le mode Avancé pour des plongées multi-niveaux avec plusieurs gaz."
+      },
+      "step3": {
+        "title": "Entrez vos paramètres",
+        "description": "Remplissez les champs requis (profondeur, temps, gaz) et ajustez les Gradient Factors selon votre niveau de conservatisme souhaité."
+      }
+    },
+    "simpleMode": {
+      "title": "Mode Simple",
+      "description": "Le mode simple est idéal pour les plongées à profondeur constante avec un seul mélange gazeux.",
+      "depth": {
+        "title": "Profondeur",
+        "description": "Entrez la profondeur maximale de votre plongée (1-100 mètres). Utilisez le curseur pour ajuster facilement."
+      },
+      "bottomTime": {
+        "title": "Temps de fond",
+        "description": "Durée passée à la profondeur maximale en minutes (1-200 minutes)."
+      },
+      "gasMix": {
+        "title": "Mélange gazeux",
+        "description": "Choisissez parmi les mélanges prédéfinis (Air, EAN32, EAN36, EAN40) ou créez un mélange personnalisé."
+      }
+    },
+    "advancedMode": {
+      "title": "Mode Avancé",
+      "description": "Le mode avancé permet de planifier des plongées complexes avec plusieurs niveaux de profondeur et changements de gaz.",
+      "multiLevel": {
+        "title": "Plongées multi-niveaux",
+        "description": "Ajoutez plusieurs segments de plongée à différentes profondeurs avec des durées spécifiques."
+      },
+      "multiGas": {
+        "title": "Multi-gaz",
+        "description": "Configurez plusieurs mélanges gazeux (fond et décompression) pour optimiser votre profil de plongée."
+      },
+      "rates": {
+        "title": "Vitesses personnalisées",
+        "description": "Ajustez les vitesses de descente et de remontée selon vos préférences."
+      }
+    },
+    "gradientFactors": {
+      "title": "Comprendre les Gradient Factors",
+      "description": "Les Gradient Factors (GF) contrôlent le niveau de conservatisme de votre profil de décompression. Ils sont exprimés sous la forme GF Low/GF High.",
+      "conservative": {
+        "title": "Conservateur",
+        "description": "Profils plus sûrs avec des temps de décompression plus longs. Recommandé pour les plongeurs débutants, les conditions difficiles ou après une pause prolongée."
+      },
+      "moderate": {
+        "title": "Modéré",
+        "description": "Équilibre entre sécurité et efficacité. Convient à la plupart des plongeurs expérimentés dans des conditions normales."
+      },
+      "aggressive": {
+        "title": "Agressif",
+        "description": "Temps de décompression plus courts mais risque accru. Réservé aux plongeurs très expérimentés dans des conditions optimales."
+      }
+    },
+    "results": {
+      "title": "Comprendre les résultats",
+      "description": "Une fois le calcul effectué, vous verrez plusieurs informations importantes :",
+      "totalTime": {
+        "title": "Temps total de plongée",
+        "description": "Durée totale de la plongée incluant la descente, le temps de fond, la remontée et tous les paliers."
+      },
+      "decoTime": {
+        "title": "Temps de décompression",
+        "description": "Temps total passé aux paliers de décompression."
+      },
+      "ndl": {
+        "title": "Limite sans palier (NDL)",
+        "description": "Temps maximum que vous pouvez passer à cette profondeur sans nécessiter de paliers de décompression."
+      },
+      "decoStops": {
+        "title": "Paliers de décompression",
+        "description": "Liste détaillée de tous les paliers requis avec leur profondeur, durée et gaz à utiliser."
+      }
+    },
+    "safety": {
+      "title": "⚠️ Avertissement de sécurité important",
+      "description": "Ce calculateur est un outil éducatif uniquement. Il ne remplace PAS un ordinateur de plongée certifié.",
+      "point1": "Utilisez toujours un ordinateur de plongée certifié lors de vos plongées réelles",
+      "point2": "Ne plongez jamais au-delà de votre niveau de formation et de certification",
+      "point3": "Consultez toujours un professionnel qualifié pour la planification de plongées techniques",
+      "point4": "Les calculs sont fournis à titre indicatif et ne garantissent pas la sécurité de la plongée"
+    }
+  },
+  "diveSite": {
+    "title": "Lieu de plongée",
+    "subtitle": "Configurez les conditions de votre site de plongée",
+    "backButton": "Retour à l'accueil",
+    "form": {
+      "siteName": "Nom du site",
+      "siteNamePlaceholder": "Ex: Épave du Donator",
+      "waterType": "Type d'eau",
+      "waterTypes": {
+        "sea": "Mer",
+        "lake": "Lac",
+        "river": "Rivière",
+        "quarry": "Carrière"
+      },
+      "location": "Localisation",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "address": "Adresse (optionnel)",
+      "addressPlaceholder": "Ex: Port de Nice, France",
+      "altitude": "Altitude",
+      "altitudeUnit": "mètres au-dessus du niveau de la mer",
+      "waterTemperature": "Température de l'eau",
+      "temperatureUnit": "°C",
+      "useEstimated": "Utiliser la température estimée",
+      "fetchWeather": "Récupérer la météo",
+      "saveSite": "Enregistrer le site",
+      "clearForm": "Effacer"
+    },
+    "weather": {
+      "title": "Conditions météorologiques",
+      "loading": "Chargement des données météo...",
+      "error": "Erreur lors du chargement de la météo",
+      "lastUpdated": "Dernière mise à jour",
+      "airTemperature": "Température de l'air",
+      "windSpeed": "Vitesse du vent",
+      "windDirection": "Direction du vent",
+      "waveHeight": "Hauteur des vagues",
+      "precipitation": "Précipitations",
+      "cloudCover": "Couverture nuageuse",
+      "pressure": "Pression atmosphérique",
+      "humidity": "Humidité",
+      "conditions": "Conditions",
+      "notAvailable": "Non disponible"
+    },
+    "current": {
+      "title": "Conditions actuelles",
+      "speed": "Vitesse du courant",
+      "direction": "Direction du courant",
+      "knots": "nœuds"
+    },
+    "savedSites": {
+      "title": "Sites enregistrés",
+      "empty": "Aucun site enregistré",
+      "load": "Charger",
+      "delete": "Supprimer",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce site ?"
+    },
+    "info": {
+      "title": "Informations",
+      "altitudeEffect": "L'altitude affecte les calculs de décompression. Les sites en altitude nécessitent des ajustements.",
+      "waterTempEffect": "La température de l'eau influence la consommation d'air et le confort du plongeur.",
+      "weatherSource": "Données météo fournies par Open-Meteo (API open-source)"
+    },
+    "validation": {
+      "nameRequired": "Le nom du site est requis",
+      "invalidLatitude": "Latitude invalide (-90 à 90)",
+      "invalidLongitude": "Longitude invalide (-180 à 180)",
+      "invalidAltitude": "Altitude invalide",
+      "invalidTemperature": "Température invalide"
+    }
+  },
+  "diverInfo": {
+    "title": "Informations du plongeur",
+    "firstName": "Prénom",
+    "firstNamePlaceholder": "Entrez votre prénom",
+    "lastName": "Nom",
+    "lastNamePlaceholder": "Entrez votre nom",
+    "phoneNumber": "Numéro de téléphone",
+    "phoneNumberPlaceholder": "+33 6 12 34 56 78",
+    "padiNumber": "Numéro PADI",
+    "padiNumberPlaceholder": "Ex: 1234567",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "requiredFields": "* Champs obligatoires",
+    "validation": {
+      "firstNameRequired": "Le prénom est requis",
+      "lastNameRequired": "Le nom est requis",
+      "phoneRequired": "Le numéro de téléphone est requis",
+      "phoneInvalid": "Format de téléphone invalide",
+      "padiRequired": "Le numéro PADI est requis"
+    },
+    "error": {
+      "saveFailed": "Erreur lors de l'enregistrement des informations"
+    }
+  }
+}
