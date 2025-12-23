@@ -673,5 +673,50 @@
     "error": {
       "saveFailed": "Error saving information"
     }
+  },
+  "comparison": {
+    "title": "Model Comparison",
+    "subtitle": "Compare different decompression algorithms",
+    "selectModels": "Select Models to Compare",
+    "modelsSelected": "models selected",
+    "clearSelection": "Clear selection",
+    "clear": "Clear",
+    "compareButton": "Compare Models",
+    "selectAtLeastTwo": "Select at least 2 models to compare",
+    "bubbleModel": "Bubble Model",
+    "dissolvedGas": "Dissolved Gas",
+    "deepStops": "Deep Stops",
+    "empirical": "Empirical",
+    "conservatism": {
+      "conservative": "Conservative",
+      "moderate": "Moderate",
+      "liberal": "Liberal"
+    },
+    "results": {
+      "title": "Comparison Results",
+      "summary": "Summary",
+      "differences": "Key Differences",
+      "recommendations": "Recommendations",
+      "stopSchedule": "Stop Schedule",
+      "noStops": "No decompression stops required"
+    },
+    "metrics": {
+      "totalTime": "Total Time",
+      "decoTime": "Deco Time",
+      "firstStop": "First Stop",
+      "stopCount": "Stops",
+      "deepStopTime": "Deep Stop Time",
+      "shallowStopTime": "Shallow Stop Time"
+    },
+    "chart": {
+      "title": "Profile Comparison",
+      "depth": "Depth (m)",
+      "time": "Time (min)",
+      "legend": "Models"
+    },
+    "export": {
+      "button": "Export Comparison",
+      "generating": "Generating..."
+    }
   }
 }

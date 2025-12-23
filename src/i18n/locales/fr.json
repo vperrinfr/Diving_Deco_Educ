@@ -673,5 +673,50 @@
     "error": {
       "saveFailed": "Erreur lors de l'enregistrement des informations"
     }
+  },
+  "comparison": {
+    "title": "Comparaison de Modèles",
+    "subtitle": "Comparer différents algorithmes de décompression",
+    "selectModels": "Sélectionner les Modèles à Comparer",
+    "modelsSelected": "modèles sélectionnés",
+    "clearSelection": "Effacer la sélection",
+    "clear": "Effacer",
+    "compareButton": "Comparer les Modèles",
+    "selectAtLeastTwo": "Sélectionnez au moins 2 modèles pour comparer",
+    "bubbleModel": "Modèle à Bulles",
+    "dissolvedGas": "Gaz Dissous",
+    "deepStops": "Paliers Profonds",
+    "empirical": "Empirique",
+    "conservatism": {
+      "conservative": "Conservateur",
+      "moderate": "Modéré",
+      "liberal": "Libéral"
+    },
+    "results": {
+      "title": "Résultats de Comparaison",
+      "summary": "Résumé",
+      "differences": "Différences Clés",
+      "recommendations": "Recommandations",
+      "stopSchedule": "Programme de Paliers",
+      "noStops": "Aucun palier de décompression requis"
+    },
+    "metrics": {
+      "totalTime": "Temps Total",
+      "decoTime": "Temps de Déco",
+      "firstStop": "Premier Palier",
+      "stopCount": "Paliers",
+      "deepStopTime": "Temps Paliers Profonds",
+      "shallowStopTime": "Temps Paliers Peu Profonds"
+    },
+    "chart": {
+      "title": "Comparaison des Profils",
+      "depth": "Profondeur (m)",
+      "time": "Temps (min)",
+      "legend": "Modèles"
+    },
+    "export": {
+      "button": "Exporter la Comparaison",
+      "generating": "Génération..."
+    }
   }
 }
