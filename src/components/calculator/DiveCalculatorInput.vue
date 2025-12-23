@@ -29,7 +29,7 @@ const useCustomGas = ref(false);
 // Advanced mode state
 const segments = ref<DiveSegment[]>([]);
 const gasInventory = ref<GasInventory>({
-  bottomGas: PREDEFINED_GASES.AIR,
+  bottomGas: PREDEFINED_GASES['AIR']!,
   decoGases: []
 });
 const rates = ref({
@@ -56,7 +56,7 @@ const currentGasMix = computed((): GasMix => {
       name: 'Custom'
     };
   }
-  return PREDEFINED_GASES[selectedGas.value] || PREDEFINED_GASES.AIR;
+  return PREDEFINED_GASES[selectedGas.value] || PREDEFINED_GASES['AIR']!;
 });
 
 // Validate custom gas percentages

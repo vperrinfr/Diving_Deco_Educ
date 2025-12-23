@@ -115,6 +115,333 @@ const goBack = () => {
               </div>
             </div>
 
+            <!-- Educational Section: Diving Concepts -->
+            <div class="cds--tile guide-section education-section">
+              <h2 class="cds--type-heading-04">{{ t('guide.education.title') }}</h2>
+              <p class="cds--type-body-long-01 section-subtitle">{{ t('guide.education.subtitle') }}</p>
+
+              <!-- Gradient Factors -->
+              <div class="education-subsection">
+                <h3 class="cds--type-heading-03">{{ t('guide.education.gradientFactorsSection.title') }}</h3>
+                <p class="cds--type-body-long-01">{{ t('guide.education.gradientFactorsSection.intro') }}</p>
+                
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.gradientFactorsSection.whatAreGF.title') }}</h4>
+                  <p class="cds--type-body-long-01" v-html="t('guide.education.gradientFactorsSection.whatAreGF.description')"></p>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.gradientFactorsSection.howTheyWork.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.gradientFactorsSection.howTheyWork.gfLow')"></li>
+                    <li v-html="t('guide.education.gradientFactorsSection.howTheyWork.gfHigh')"></li>
+                    <li v-html="t('guide.education.gradientFactorsSection.howTheyWork.gradient')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.gradientFactorsSection.examples.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.gradientFactorsSection.examples.conservative')"></li>
+                    <li v-html="t('guide.education.gradientFactorsSection.examples.moderate')"></li>
+                    <li v-html="t('guide.education.gradientFactorsSection.examples.aggressive')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card impact-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.gradientFactorsSection.impact.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.gradientFactorsSection.impact.decoTime')"></li>
+                    <li v-html="t('guide.education.gradientFactorsSection.impact.risk')"></li>
+                    <li v-html="t('guide.education.gradientFactorsSection.impact.recommendation')"></li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- NDL Section -->
+              <div class="education-subsection">
+                <h3 class="cds--type-heading-03">{{ t('guide.education.ndlSection.title') }}</h3>
+                
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.ndlSection.definition.title') }}</h4>
+                  <p class="cds--type-body-long-01">{{ t('guide.education.ndlSection.definition.description') }}</p>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.ndlSection.howItWorks.title') }}</h4>
+                  <ul class="concept-list">
+                    <li>{{ t('guide.education.ndlSection.howItWorks.saturation') }}</li>
+                    <li>{{ t('guide.education.ndlSection.howItWorks.limit') }}</li>
+                    <li>{{ t('guide.education.ndlSection.howItWorks.calculation') }}</li>
+                  </ul>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.ndlSection.factors.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.ndlSection.factors.depth')"></li>
+                    <li v-html="t('guide.education.ndlSection.factors.gas')"></li>
+                    <li v-html="t('guide.education.ndlSection.factors.altitude')"></li>
+                    <li v-html="t('guide.education.ndlSection.factors.gf')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card practical-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.ndlSection.practical.title') }}</h4>
+                  <ul class="concept-list">
+                    <li>{{ t('guide.education.ndlSection.practical.planning') }}</li>
+                    <li>{{ t('guide.education.ndlSection.practical.monitoring') }}</li>
+                    <li>{{ t('guide.education.ndlSection.practical.safety') }}</li>
+                    <li>{{ t('guide.education.ndlSection.practical.multilevel') }}</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Decompression Stops Section -->
+              <div class="education-subsection">
+                <h3 class="cds--type-heading-03">{{ t('guide.education.decoStopsSection.title') }}</h3>
+                
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.decoStopsSection.introduction.title') }}</h4>
+                  <p class="cds--type-body-long-01">{{ t('guide.education.decoStopsSection.introduction.description') }}</p>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.decoStopsSection.purpose.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.decoStopsSection.purpose.elimination')"></li>
+                    <li v-html="t('guide.education.decoStopsSection.purpose.prevention')"></li>
+                    <li v-html="t('guide.education.decoStopsSection.purpose.equilibrium')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.decoStopsSection.types.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.decoStopsSection.types.mandatory')"></li>
+                    <li v-html="t('guide.education.decoStopsSection.types.safety')"></li>
+                    <li v-html="t('guide.education.decoStopsSection.types.deep')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.decoStopsSection.schedule.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.decoStopsSection.schedule.depth')"></li>
+                    <li v-html="t('guide.education.decoStopsSection.schedule.duration')"></li>
+                    <li v-html="t('guide.education.decoStopsSection.schedule.runtime')"></li>
+                    <li v-html="t('guide.education.decoStopsSection.schedule.gas')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card example-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.decoStopsSection.example.title') }}</h4>
+                  <p class="cds--type-body-long-01 example-scenario">{{ t('guide.education.decoStopsSection.example.scenario') }}</p>
+                  <ol class="example-steps">
+                    <li>{{ t('guide.education.decoStopsSection.example.step1') }}</li>
+                    <li>{{ t('guide.education.decoStopsSection.example.step2') }}</li>
+                    <li>{{ t('guide.education.decoStopsSection.example.step3') }}</li>
+                    <li>{{ t('guide.education.decoStopsSection.example.step4') }}</li>
+                    <li>{{ t('guide.education.decoStopsSection.example.step5') }}</li>
+                    <li>{{ t('guide.education.decoStopsSection.example.step6') }}</li>
+                    <li>{{ t('guide.education.decoStopsSection.example.step7') }}</li>
+                  </ol>
+                  <p class="cds--type-body-long-01 example-total"><strong>{{ t('guide.education.decoStopsSection.example.total') }}</strong></p>
+                </div>
+
+                <div class="concept-card safety-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.decoStopsSection.safety.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.decoStopsSection.safety.never')"></li>
+                    <li>{{ t('guide.education.decoStopsSection.safety.ascent') }}</li>
+                    <li>{{ t('guide.education.decoStopsSection.safety.computer') }}</li>
+                    <li>{{ t('guide.education.decoStopsSection.safety.backup') }}</li>
+                    <li>{{ t('guide.education.decoStopsSection.safety.conservative') }}</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Profile Reading Section -->
+              <div class="education-subsection">
+                <h3 class="cds--type-heading-03">{{ t('guide.education.profileReadingSection.title') }}</h3>
+                
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.profileReadingSection.introduction.title') }}</h4>
+                  <p class="cds--type-body-long-01">{{ t('guide.education.profileReadingSection.introduction.description') }}</p>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.profileReadingSection.axes.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.profileReadingSection.axes.horizontal')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.axes.vertical')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.profileReadingSection.phases.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.profileReadingSection.phases.descent')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.phases.bottom')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.phases.ascent')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.phases.stops')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.phases.surface')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.profileReadingSection.colors.title') }}</h4>
+                  <ul class="concept-list color-list">
+                    <li v-html="t('guide.education.profileReadingSection.colors.descent')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.colors.bottom')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.colors.deco')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.colors.safety')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.colors.danger')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.profileReadingSection.information.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.profileReadingSection.information.maxDepth')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.information.totalTime')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.information.decoStops')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.information.ndl')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.information.gasSwitches')"></li>
+                  </ul>
+                </div>
+
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.profileReadingSection.multiLevel.title') }}</h4>
+                  <p class="cds--type-body-long-01">{{ t('guide.education.profileReadingSection.multiLevel.description') }}</p>
+                  <ul class="concept-list">
+                    <li>{{ t('guide.education.profileReadingSection.multiLevel.advantage') }}</li>
+                    <li>{{ t('guide.education.profileReadingSection.multiLevel.calculation') }}</li>
+                    <li>{{ t('guide.education.profileReadingSection.multiLevel.planning') }}</li>
+                  </ul>
+                </div>
+
+                <div class="concept-card practical-card">
+                  <h4 class="cds--type-heading-02">{{ t('guide.education.profileReadingSection.practical.title') }}</h4>
+                  <ul class="concept-list">
+                    <li v-html="t('guide.education.profileReadingSection.practical.before')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.practical.during')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.practical.after')"></li>
+                    <li v-html="t('guide.education.profileReadingSection.practical.compare')"></li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Air Consumption Education Section -->
+              <div class="education-subsection">
+                <h3 class="cds--type-heading-03">{{ t('airConsumption.education.title') }}</h3>
+                
+                <!-- SAC Rate -->
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('airConsumption.education.sacRate.title') }}</h4>
+                  <p class="cds--type-body-long-01">{{ t('airConsumption.education.sacRate.definition') }}</p>
+                  <p class="cds--type-body-long-01">{{ t('airConsumption.education.sacRate.calculation') }}</p>
+                  
+                  <div style="margin-top: 1rem;">
+                    <h5 class="cds--type-heading-02">{{ t('airConsumption.education.sacRate.factors.title') }}</h5>
+                    <ul class="concept-list">
+                      <li v-html="t('airConsumption.education.sacRate.factors.experience')"></li>
+                      <li v-html="t('airConsumption.education.sacRate.factors.effort')"></li>
+                      <li v-html="t('airConsumption.education.sacRate.factors.stress')"></li>
+                      <li v-html="t('airConsumption.education.sacRate.factors.temperature')"></li>
+                      <li v-html="t('airConsumption.education.sacRate.factors.equipment')"></li>
+                    </ul>
+                  </div>
+
+                  <div class="typical-values" style="margin-top: 1rem; padding: 1rem; background: #f4f4f4; border-radius: 4px;">
+                    <h5 class="cds--type-heading-02">{{ t('airConsumption.education.sacRate.typical.title') }}</h5>
+                    <ul class="concept-list" style="margin-top: 0.5rem;">
+                      <li>{{ t('airConsumption.education.sacRate.typical.beginner') }}</li>
+                      <li>{{ t('airConsumption.education.sacRate.typical.intermediate') }}</li>
+                      <li>{{ t('airConsumption.education.sacRate.typical.advanced') }}</li>
+                      <li>{{ t('airConsumption.education.sacRate.typical.professional') }}</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Cylinder Sizes -->
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('airConsumption.education.cylinderSize.title') }}</h4>
+                  <p class="cds--type-body-long-01">{{ t('airConsumption.education.cylinderSize.description') }}</p>
+                  
+                  <div style="margin-top: 1rem;">
+                    <h5 class="cds--type-heading-02">{{ t('airConsumption.education.cylinderSize.common.title') }}</h5>
+                    <ul class="concept-list">
+                      <li v-html="t('airConsumption.education.cylinderSize.common.single12')"></li>
+                      <li v-html="t('airConsumption.education.cylinderSize.common.single15')"></li>
+                      <li v-html="t('airConsumption.education.cylinderSize.common.double12')"></li>
+                      <li v-html="t('airConsumption.education.cylinderSize.common.stage')"></li>
+                      <li v-html="t('airConsumption.education.cylinderSize.common.pony')"></li>
+                    </ul>
+                  </div>
+
+                  <div class="example-card" style="margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 4px;">
+                    <h5 class="cds--type-heading-02">{{ t('airConsumption.education.cylinderSize.calculation.title') }}</h5>
+                    <p class="cds--type-body-long-01"><strong>{{ t('airConsumption.education.cylinderSize.calculation.formula') }}</strong></p>
+                    <p class="cds--type-body-long-01">{{ t('airConsumption.education.cylinderSize.calculation.example') }}</p>
+                  </div>
+                </div>
+
+                <!-- Air Planning -->
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('airConsumption.education.planning.title') }}</h4>
+                  
+                  <div style="margin-top: 1rem;">
+                    <h5 class="cds--type-heading-02">{{ t('airConsumption.education.planning.ruleOfThirds.title') }}</h5>
+                    <p class="cds--type-body-long-01">{{ t('airConsumption.education.planning.ruleOfThirds.description') }}</p>
+                    <p class="cds--type-body-long-01"><em>{{ t('airConsumption.education.planning.ruleOfThirds.use') }}</em></p>
+                  </div>
+
+                  <div style="margin-top: 1rem;">
+                    <h5 class="cds--type-heading-02">{{ t('airConsumption.education.planning.turnPressure.title') }}</h5>
+                    <p class="cds--type-body-long-01">{{ t('airConsumption.education.planning.turnPressure.description') }}</p>
+                    <p class="cds--type-body-long-01">{{ t('airConsumption.education.planning.turnPressure.calculation') }}</p>
+                  </div>
+
+                  <div class="safety-card" style="margin-top: 1rem; padding: 1rem; background: #ffebee; border-radius: 4px; border-left: 4px solid #da1e28;">
+                    <h5 class="cds--type-heading-02">{{ t('airConsumption.education.planning.contingency.title') }}</h5>
+                    <ul class="concept-list">
+                      <li>{{ t('airConsumption.education.planning.contingency.buddy') }}</li>
+                      <li>{{ t('airConsumption.education.planning.contingency.stress') }}</li>
+                      <li>{{ t('airConsumption.education.planning.contingency.deco') }}</li>
+                      <li>{{ t('airConsumption.education.planning.contingency.reserve') }}</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Multi-Cylinder -->
+                <div class="concept-card">
+                  <h4 class="cds--type-heading-02">{{ t('airConsumption.education.multiCylinder.title') }}</h4>
+                  <p class="cds--type-body-long-01">{{ t('airConsumption.education.multiCylinder.description') }}</p>
+                  
+                  <div style="margin-top: 1rem;">
+                    <h5 class="cds--type-heading-02">{{ t('airConsumption.education.multiCylinder.types.title') }}</h5>
+                    <ul class="concept-list">
+                      <li v-html="t('airConsumption.education.multiCylinder.types.sidemount')"></li>
+                      <li v-html="t('airConsumption.education.multiCylinder.types.backmount')"></li>
+                      <li v-html="t('airConsumption.education.multiCylinder.types.stage')"></li>
+                      <li v-html="t('airConsumption.education.multiCylinder.types.bailout')"></li>
+                    </ul>
+                  </div>
+
+                  <div class="practical-card" style="margin-top: 1rem; padding: 1rem; background: #e8f5e9; border-radius: 4px; border-left: 4px solid #24a148;">
+                    <h5 class="cds--type-heading-02">{{ t('airConsumption.education.multiCylinder.advantages.title') }}</h5>
+                    <ul class="concept-list">
+                      <li>{{ t('airConsumption.education.multiCylinder.advantages.redundancy') }}</li>
+                      <li>{{ t('airConsumption.education.multiCylinder.advantages.capacity') }}</li>
+                      <li>{{ t('airConsumption.education.multiCylinder.advantages.optimization') }}</li>
+                      <li>{{ t('airConsumption.education.multiCylinder.advantages.safety') }}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Understanding Results -->
             <div class="cds--tile guide-section">
               <h2 class="cds--type-heading-04">{{ t('guide.results.title') }}</h2>
@@ -404,6 +731,174 @@ const goBack = () => {
   font-size: 0.875rem;
   line-height: 1.42857;
   color: #161616;
+}
+
+/* Educational Section Styles */
+.education-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-left: 4px solid #0f62fe;
+}
+
+.section-subtitle {
+  font-style: italic;
+  color: #525252;
+  margin-bottom: 2rem;
+}
+
+.education-subsection {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e0e0e0;
+}
+
+.education-subsection:first-child {
+  margin-top: 1.5rem;
+  border-top: none;
+  padding-top: 0;
+}
+
+.cds--type-heading-03 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #0f62fe;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cds--type-heading-03::before {
+  content: '📚';
+  font-size: 1.5rem;
+}
+
+.concept-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.concept-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.concept-card h4 {
+  color: #161616;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.concept-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+
+.concept-list li {
+  padding: 0.75rem 0 0.75rem 2rem;
+  position: relative;
+  line-height: 1.6;
+  color: #525252;
+}
+
+.concept-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0.5rem;
+  color: #0f62fe;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.concept-list li strong {
+  color: #161616;
+  font-weight: 600;
+}
+
+/* Special card types */
+.impact-card {
+  background: linear-gradient(135deg, #fff8e1 0%, #ffffff 100%);
+  border-left: 4px solid #f1c21b;
+}
+
+.practical-card {
+  background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);
+  border-left: 4px solid #24a148;
+}
+
+.safety-card {
+  background: linear-gradient(135deg, #ffebee 0%, #ffffff 100%);
+  border-left: 4px solid #da1e28;
+}
+
+.example-card {
+  background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+  border-left: 4px solid #0f62fe;
+}
+
+.example-scenario {
+  background: #f4f4f4;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+  font-weight: 500;
+  color: #161616;
+}
+
+.example-steps {
+  list-style: none;
+  counter-reset: step-counter;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.example-steps li {
+  counter-increment: step-counter;
+  padding: 0.75rem 0 0.75rem 3rem;
+  position: relative;
+  line-height: 1.6;
+  color: #525252;
+  border-left: 2px solid #e0e0e0;
+  margin-left: 1rem;
+}
+
+.example-steps li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: -1.25rem;
+  top: 0.5rem;
+  background: #0f62fe;
+  color: #ffffff;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.example-total {
+  background: #0f62fe;
+  color: #ffffff;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.color-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Responsive */

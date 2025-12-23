@@ -1,6 +1,8 @@
 import jsPDF from 'jspdf';
 import type { DiveProfile, DiveParameters, MultiLevelDiveParameters, DecompressionStop } from '../types';
 import type { DiveSite, WeatherConditions } from '../types/diveSite';
+import type { AirConsumptionResult, CylinderConfig } from '../types/airConsumption';
+import { STANDARD_CYLINDERS } from '../types/airConsumption';
 import { isMultiLevelDive } from '../types';
 import { formatGasMix } from '../utils/gasMix';
 
@@ -16,11 +18,12 @@ interface ExportData {
   diverInfo?: DiverInfo;
   diveSite?: DiveSite;
   weather?: WeatherConditions;
+  airConsumption?: AirConsumptionResult;
 }
 
-// Format optimisé pour lecture sur bateau : grandes polices, bon contraste
+// Format optimisé pour lecture sur bateau : grandes polices, bon contraste, max 2 pages
 export function generateDivePlanPDF(data: ExportData): void {
-  const { profile, diverInfo, diveSite, weather } = data;
+  const { profile, diverInfo, diveSite, weather, airConsumption } = data;
   
   // Format A4 portrait pour faciliter la lecture
   const pdf = new jsPDF({
@@ -68,281 +71,267 @@ export function generateDivePlanPDF(data: ExportData): void {
     }
   };
 
-  // ===== EN-TÊTE =====
+  // ===== EN-TÊTE COMPACT =====
   pdf.setFillColor(22, 22, 22);
-  pdf.rect(0, 0, pageWidth, 35, 'F');
+  pdf.rect(0, 0, pageWidth, 28, 'F');
   
-  pdf.setFontSize(24);
+  pdf.setFontSize(20);
   pdf.setFont('helvetica', 'bold');
   pdf.setTextColor(255, 255, 255);
-  pdf.text('PLAN DE PLONGÉE', pageWidth / 2, 15, { align: 'center' });
+  pdf.text('PLAN DE PLONGÉE', pageWidth / 2, 12, { align: 'center' });
   
-  pdf.setFontSize(12);
+  pdf.setFontSize(10);
   pdf.setFont('helvetica', 'normal');
   const currentDate = new Date().toLocaleDateString('fr-FR', {
-    weekday: 'long',
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric'
   });
-  pdf.text(currentDate, pageWidth / 2, 25, { align: 'center' });
+  pdf.text(currentDate, pageWidth / 2, 20, { align: 'center' });
   
-  yPos = 45;
+  yPos = 35;
 
-  // ===== INFORMATIONS PLONGEUR =====
+  // ===== INFORMATIONS PLONGEUR (COMPACT) =====
   if (diverInfo) {
-    addSection('PLONGEUR');
-    
-    pdf.setFontSize(16);
+    pdf.setFontSize(11);
     pdf.setFont('helvetica', 'bold');
     pdf.text(`${diverInfo.firstName} ${diverInfo.lastName}`, margin, yPos);
-    yPos += 10;
-    
-    pdf.setFontSize(12);
     pdf.setFont('helvetica', 'normal');
-    pdf.text(`Téléphone: ${diverInfo.phoneNumber}`, margin, yPos);
-    yPos += 7;
-    pdf.text(`N° PADI: ${diverInfo.padiNumber}`, margin, yPos);
-    yPos += 10;
+    pdf.setFontSize(9);
+    pdf.text(`Tel: ${diverInfo.phoneNumber} | PADI: ${diverInfo.padiNumber}`, margin, yPos + 5);
+    yPos += 12;
   }
 
   // ===== SITE DE PLONGÉE =====
   if (diveSite) {
-    checkPageBreak(60);
     addSection('SITE DE PLONGÉE');
     
-    pdf.setFontSize(16);
+    pdf.setFontSize(12);
     pdf.setFont('helvetica', 'bold');
     pdf.text(diveSite.name, margin, yPos);
-    yPos += 10;
+    yPos += 7;
     
-    pdf.setFontSize(12);
+    pdf.setFontSize(9);
     pdf.setFont('helvetica', 'normal');
     
     if (diveSite.location.address) {
-      pdf.text(`Lieu: ${diveSite.location.address}`, margin, yPos);
-      yPos += 7;
+      pdf.text(`📍 ${diveSite.location.address}`, margin, yPos);
+      yPos += 5;
     }
     
-    pdf.text(`Coordonnées: ${diveSite.location.latitude.toFixed(6)}°, ${diveSite.location.longitude.toFixed(6)}°`, margin, yPos);
-    yPos += 7;
+    pdf.text(`Coordonnées: ${diveSite.location.latitude.toFixed(4)}°, ${diveSite.location.longitude.toFixed(4)}°`, margin, yPos);
+    yPos += 5;
     
-    pdf.text(`Altitude: ${diveSite.altitude}m`, margin, yPos);
-    yPos += 7;
-    
-    pdf.text(`Température eau: ${diveSite.waterTemperature}°C`, margin, yPos);
-    yPos += 7;
+    const siteInfo = `Altitude: ${diveSite.altitude}m | Eau: ${diveSite.waterTemperature}°C`;
+    pdf.text(siteInfo, margin, yPos);
+    yPos += 5;
     
     if (diveSite.maxDepth) {
-      pdf.text(`Profondeur max site: ${diveSite.maxDepth}m`, margin, yPos);
-      yPos += 7;
+      pdf.text(`Profondeur max du site: ${diveSite.maxDepth}m`, margin, yPos);
+      yPos += 5;
     }
     
     yPos += 3;
   }
-
+  
   // ===== MÉTÉO =====
   if (weather) {
-    checkPageBreak(50);
-    addSection('CONDITIONS MÉTÉO');
-    
-    pdf.setFontSize(12);
+    pdf.setFontSize(9);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Météo:', margin, yPos);
     pdf.setFont('helvetica', 'normal');
-    
-    pdf.text(`Température air: ${weather.temperature}°C`, margin, yPos);
-    yPos += 7;
-    
-    pdf.text(`Vent: ${weather.windSpeed} km/h (${weather.windDirection}°)`, margin, yPos);
-    yPos += 7;
-    
-    if (weather.waveHeight) {
-      pdf.text(`Hauteur vagues: ${weather.waveHeight}m`, margin, yPos);
-      yPos += 7;
-    }
-    
-    pdf.text(`Pression: ${weather.pressure} hPa`, margin, yPos);
-    yPos += 7;
-    
-    pdf.text(`Humidité: ${weather.humidity}%`, margin, yPos);
-    yPos += 10;
+    const weatherInfo = `Air: ${weather.temperature}°C | Vent: ${weather.windSpeed}km/h (${weather.windDirection}°) | Pression: ${weather.pressure}hPa`;
+    pdf.text(weatherInfo, margin + 20, yPos);
+    yPos += 8;
   }
 
-  // ===== PARAMÈTRES DE PLONGÉE =====
-  checkPageBreak(80);
-  addSection('PARAMÈTRES DE PLONGÉE');
+  // ===== PARAMÈTRES DE PLONGÉE (COMPACT) =====
+  addSection('PARAMÈTRES');
   
-  pdf.setFontSize(14);
+  // Ligne 1: Profondeur et temps
+  pdf.setFontSize(16);
   pdf.setFont('helvetica', 'bold');
-  
-  // Profondeur max en grand
-  pdf.setFontSize(18);
   pdf.setTextColor(0, 98, 254);
-  pdf.text(`Profondeur max: ${profile.maxDepth}m`, margin, yPos);
-  yPos += 12;
+  pdf.text(`${profile.maxDepth}m`, margin, yPos);
   
-  pdf.setFontSize(14);
+  pdf.setFontSize(11);
   pdf.setTextColor(0, 0, 0);
+  pdf.text(`| Total: ${formatTime(profile.totalDiveTime)} | Déco: ${formatTime(profile.totalDecompressionTime)}`, margin + 25, yPos);
+  yPos += 8;
   
+  // Ligne 2: Gaz et GF
+  pdf.setFontSize(10);
+  pdf.setFont('helvetica', 'normal');
   if (!isMultiLevelDive(profile.parameters)) {
     const params = profile.parameters as DiveParameters;
-    pdf.text(`Temps fond: ${params.bottomTime} min`, margin, yPos);
-    yPos += 9;
-    pdf.text(`Mélange: ${formatGasMix(params.gasMix)}`, margin, yPos);
-    yPos += 9;
+    pdf.text(`Gaz: ${formatGasMix(params.gasMix)} | Temps fond: ${params.bottomTime}min | GF: ${profile.parameters.gradientFactorLow}/${profile.parameters.gradientFactorHigh}`, margin, yPos);
+  } else {
+    pdf.text(`GF: ${profile.parameters.gradientFactorLow}/${profile.parameters.gradientFactorHigh}`, margin, yPos);
   }
-  
-  pdf.setFontSize(12);
-  pdf.text(`Gradient Factors: ${profile.parameters.gradientFactorLow}/${profile.parameters.gradientFactorHigh}`, margin, yPos);
-  yPos += 9;
-  
-  pdf.text(`Temps total: ${formatTime(profile.totalDiveTime)}`, margin, yPos);
-  yPos += 9;
-  
-  pdf.text(`Temps déco: ${formatTime(profile.totalDecompressionTime)}`, margin, yPos);
-  yPos += 12;
+  yPos += 10;
 
-  // ===== SEGMENTS (si multi-niveau) =====
+  // ===== SEGMENTS (COMPACT) =====
   if (profile.segments && profile.segments.length > 0) {
     const bottomSegments = profile.segments.filter(s => s.segmentType === 'bottom');
     if (bottomSegments.length > 0) {
-      checkPageBreak(40 + bottomSegments.length * 10);
-      addSection('SEGMENTS DE PLONGÉE');
-      
-      pdf.setFontSize(11);
+      pdf.setFontSize(9);
       pdf.setFont('helvetica', 'bold');
-      
-      bottomSegments.forEach((segment, index) => {
-        pdf.text(`${index + 1}. ${segment.depth}m - ${segment.duration} min - ${formatGasMix(segment.gasMix)}`, margin + 5, yPos);
-        yPos += 8;
-      });
-      
+      pdf.text('Segments:', margin, yPos);
       yPos += 5;
+      
+      pdf.setFont('helvetica', 'normal');
+      bottomSegments.forEach((segment, index) => {
+        pdf.text(`${index + 1}. ${segment.depth}m/${segment.duration}min (${formatGasMix(segment.gasMix)})`, margin + 5, yPos);
+        yPos += 5;
+      });
+      yPos += 3;
     }
   }
 
-  // ===== PALIERS DE DÉCOMPRESSION =====
-  checkPageBreak(100);
-  addSection('PALIERS DE DÉCOMPRESSION');
+  // ===== PALIERS DE DÉCOMPRESSION (COMPACT) =====
+  addSection('PALIERS');
   
   if (profile.decompressionStops.length === 0) {
     pdf.setFillColor(222, 251, 230);
-    pdf.rect(margin, yPos - 5, pageWidth - 2 * margin, 20, 'F');
-    pdf.setFontSize(14);
+    pdf.rect(margin, yPos - 3, pageWidth - 2 * margin, 12, 'F');
+    pdf.setFontSize(11);
     pdf.setFont('helvetica', 'bold');
     pdf.setTextColor(14, 96, 39);
-    pdf.text('✓ PLONGÉE SANS PALIER', margin + 5, yPos + 5);
-    yPos += 25;
+    pdf.text('✓ SANS PALIER', margin + 3, yPos + 4);
+    yPos += 15;
   } else {
-    // Tableau des paliers - TRÈS LISIBLE
+    // Tableau compact
     const tableTop = yPos;
-    const colWidths = [30, 40, 40, 50];
-    const rowHeight = 12;
+    const colWidths = [25, 30, 30, 45];
+    const rowHeight = 9;
     
-    // En-tête du tableau
+    // En-tête
     pdf.setFillColor(38, 38, 38);
     pdf.rect(margin, tableTop, pageWidth - 2 * margin, rowHeight, 'F');
     
-    pdf.setFontSize(11);
+    pdf.setFontSize(9);
     pdf.setFont('helvetica', 'bold');
     pdf.setTextColor(255, 255, 255);
     
-    let xPos = margin + 3;
-    pdf.text('Profondeur', xPos, tableTop + 8);
+    let xPos = margin + 2;
+    pdf.text('Prof.', xPos, tableTop + 6);
     xPos += colWidths[0]!;
-    pdf.text('Durée', xPos, tableTop + 8);
+    pdf.text('Durée', xPos, tableTop + 6);
     xPos += colWidths[1]!;
-    pdf.text('Runtime', xPos, tableTop + 8);
+    pdf.text('Runtime', xPos, tableTop + 6);
     xPos += colWidths[2]!;
-    pdf.text('Gaz', xPos, tableTop + 8);
+    pdf.text('Gaz', xPos, tableTop + 6);
     
     yPos = tableTop + rowHeight;
     
-    // Lignes du tableau
+    // Lignes
     pdf.setTextColor(0, 0, 0);
     pdf.setFont('helvetica', 'bold');
-    pdf.setFontSize(13); // Police plus grande pour les paliers
+    pdf.setFontSize(10);
     
     profile.decompressionStops.forEach((stop, index) => {
-      checkPageBreak(rowHeight + 10);
-      
-      // Alternance de couleurs pour meilleure lisibilité
       if (index % 2 === 0) {
         pdf.setFillColor(240, 240, 240);
         pdf.rect(margin, yPos, pageWidth - 2 * margin, rowHeight, 'F');
       }
       
-      xPos = margin + 3;
-      
-      // Profondeur en bleu et gras
+      xPos = margin + 2;
       pdf.setTextColor(0, 98, 254);
-      pdf.text(`${stop.depth}m`, xPos, yPos + 8);
+      pdf.text(`${stop.depth}m`, xPos, yPos + 6);
       
       pdf.setTextColor(0, 0, 0);
       xPos += colWidths[0]!;
-      pdf.text(formatTime(stop.duration), xPos, yPos + 8);
+      pdf.text(formatTime(stop.duration), xPos, yPos + 6);
       
       xPos += colWidths[1]!;
-      pdf.text(formatTime(stop.runtime), xPos, yPos + 8);
+      pdf.text(formatTime(stop.runtime), xPos, yPos + 6);
       
       xPos += colWidths[2]!;
       pdf.setFont('helvetica', 'normal');
-      pdf.setFontSize(11);
-      pdf.text(stop.gasMix.name || formatGasMix(stop.gasMix), xPos, yPos + 8);
+      pdf.setFontSize(8);
+      pdf.text(stop.gasMix.name || formatGasMix(stop.gasMix), xPos, yPos + 6);
       
       pdf.setFont('helvetica', 'bold');
-      pdf.setFontSize(13);
+      pdf.setFontSize(10);
       
       yPos += rowHeight;
     });
     
-    yPos += 10;
+    yPos += 8;
   }
 
-  // ===== CHANGEMENTS DE GAZ =====
-  if (profile.gasSwitches && profile.gasSwitches.length > 0) {
-    checkPageBreak(40 + profile.gasSwitches.length * 10);
-    addSection('CHANGEMENTS DE GAZ');
+  // ===== BOUTEILLES & CONSOMMATION D'AIR =====
+  if (airConsumption) {
+    addSection('BOUTEILLES & CONSOMMATION');
     
-    pdf.setFontSize(11);
+    // Résumé
+    pdf.setFontSize(10);
+    pdf.setFont('helvetica', 'bold');
+    const statusColor: [number, number, number] = airConsumption.isSufficient ? [36, 161, 72] : [218, 30, 40];
+    pdf.setTextColor(statusColor[0], statusColor[1], statusColor[2]);
+    pdf.text(`${airConsumption.isSufficient ? '✓' : '⚠'} Air nécessaire: ${airConsumption.totalAirNeeded.toFixed(0)}L`, margin, yPos);
+    yPos += 7;
+    
+    // Bouteilles
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFontSize(9);
     pdf.setFont('helvetica', 'normal');
     
-    profile.gasSwitches.forEach((gasSwitch) => {
-      pdf.text(`À ${gasSwitch.depth}m: ${formatGasMix(gasSwitch.fromGas)} → ${formatGasMix(gasSwitch.toGas)}`, margin + 5, yPos);
-      yPos += 8;
+    airConsumption.cylinderUsage.forEach((usage) => {
+      const cylinder = STANDARD_CYLINDERS.find(c => c.id === usage.cylinderId);
+      const usageColor: [number, number, number] = usage.percentageUsed > 80 ? [218, 30, 40] : [0, 0, 0];
+      
+      pdf.setTextColor(usageColor[0], usageColor[1], usageColor[2]);
+      pdf.text(`• ${cylinder?.name || usage.cylinderId}: ${usage.startPressure}→${usage.endPressure.toFixed(0)}bar (${usage.percentageUsed.toFixed(0)}%)`, margin + 3, yPos);
+      yPos += 5;
     });
     
+    pdf.setTextColor(0, 0, 0);
     yPos += 5;
   }
 
-  // ===== AVERTISSEMENTS =====
-  if (profile.warnings && profile.warnings.length > 0) {
-    checkPageBreak(40 + profile.warnings.length * 10);
-    addSection('⚠️ AVERTISSEMENTS');
+  // ===== CHANGEMENTS DE GAZ (COMPACT) =====
+  if (profile.gasSwitches && profile.gasSwitches.length > 0) {
+    pdf.setFontSize(9);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Changements gaz:', margin, yPos);
+    yPos += 5;
     
-    pdf.setFontSize(11);
     pdf.setFont('helvetica', 'normal');
+    profile.gasSwitches.forEach((gasSwitch) => {
+      pdf.text(`${gasSwitch.depth}m: ${formatGasMix(gasSwitch.fromGas)} → ${formatGasMix(gasSwitch.toGas)}`, margin + 3, yPos);
+      yPos += 5;
+    });
+    yPos += 3;
+  }
+
+  // ===== AVERTISSEMENTS (COMPACT) =====
+  if (profile.warnings && profile.warnings.length > 0) {
+    pdf.setFontSize(9);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('⚠️ Avertissements:', margin, yPos);
+    yPos += 5;
     
+    pdf.setFont('helvetica', 'normal');
     profile.warnings.forEach((warning) => {
-      const color: [number, number, number] = 
+      const color: [number, number, number] =
         warning.level === 'danger' ? [218, 30, 40] :
         warning.level === 'warning' ? [255, 131, 43] :
         [0, 98, 254];
       
       pdf.setTextColor(color[0], color[1], color[2]);
-      pdf.text(`• ${warning.message}`, margin + 5, yPos);
-      yPos += 8;
+      pdf.text(`• ${warning.message}`, margin + 3, yPos);
+      yPos += 5;
     });
-    
-    yPos += 5;
+    pdf.setTextColor(0, 0, 0);
   }
 
-  // ===== PIED DE PAGE =====
-  const footerY = pageHeight - 20;
-  pdf.setFontSize(9);
+  // ===== PIED DE PAGE (COMPACT) =====
+  const footerY = pageHeight - 15;
+  pdf.setFontSize(7);
   pdf.setFont('helvetica', 'italic');
   pdf.setTextColor(100, 100, 100);
-  pdf.text('Ce plan de plongée est généré automatiquement. Vérifiez toujours avec votre ordinateur de plongée.', pageWidth / 2, footerY, { align: 'center' });
-  pdf.text('Ne plongez jamais seul. Respectez vos limites et votre formation.', pageWidth / 2, footerY + 5, { align: 'center' });
+  pdf.text('Plan généré automatiquement. Vérifiez avec votre ordinateur. Ne plongez jamais seul.', pageWidth / 2, footerY, { align: 'center' });
 
   // Générer le nom du fichier
   const fileName = `plan-plongee-${new Date().toISOString().split('T')[0]}.pdf`;

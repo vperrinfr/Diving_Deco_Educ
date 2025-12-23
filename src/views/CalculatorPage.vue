@@ -7,14 +7,31 @@ import DiveProfileResults from '../components/calculator/DiveProfileResults.vue'
 import DiveProfileChart from '../components/visualizations/DiveProfileChart.vue';
 import WarningsDisplay from '../components/common/WarningsDisplay.vue';
 import LanguageSwitcher from '../components/common/LanguageSwitcher.vue';
+import AirConsumptionManager from '../components/calculator/AirConsumptionManager.vue';
+import AirConsumptionResults from '../components/calculator/AirConsumptionResults.vue';
 import { calculateDiveProfile, calculateMultiLevelDiveProfile } from '../utils/buhlmann/decompression';
+import { calculateAirConsumption } from '../services/airConsumptionService';
 import { isMultiLevelDive } from '../types';
-import type { DiveParameters, MultiLevelDiveParameters, DiveProfile } from '../types';
+import type { DiveParameters, MultiLevelDiveParameters, DiveProfile, DiveSegment } from '../types';
+import type { AirConsumptionData, AirConsumptionResult } from '../types/airConsumption';
+import { STANDARD_CYLINDERS } from '../types/airConsumption';
 
 const router = useRouter();
 const { t } = useI18n();
 const currentProfile = ref<DiveProfile | null>(null);
 const isCalculating = ref(false);
+const airConsumptionData = ref<AirConsumptionData>({
+  surfaceAirConsumptionRate: 20,
+  cylinders: [
+    {
+      cylinderId: STANDARD_CYLINDERS[0]!.id,
+      startPressure: STANDARD_CYLINDERS[0]!.workingPressure,
+      gasType: 'bottom'
+    }
+  ],
+  reservePressure: 50
+});
+const airConsumptionResult = ref<AirConsumptionResult | null>(null);
 
 const goHome = () => {
   router.push('/');
@@ -29,6 +46,17 @@ const handleCalculate = (parameters: DiveParameters | MultiLevelDiveParameters) 
         currentProfile.value = calculateMultiLevelDiveProfile(parameters);
       } else {
         currentProfile.value = calculateDiveProfile(parameters);
+      }
+      
+      // Calculate air consumption if profile is available
+      // Both calculateDiveProfile and calculateMultiLevelDiveProfile now return segments
+      // that include bottom time and decompression stops
+      if (currentProfile.value && currentProfile.value.segments && currentProfile.value.segments.length > 0) {
+        airConsumptionResult.value = calculateAirConsumption(
+          currentProfile.value.segments,
+          airConsumptionData.value,
+          STANDARD_CYLINDERS
+        );
       }
     } catch (error) {
       console.error('Error calculating dive profile:', error);
@@ -91,6 +119,9 @@ const handleCalculate = (parameters: DiveParameters | MultiLevelDiveParameters) 
           <div class="cds--col-lg-4 cds--col-md-8 cds--col-sm-4">
             <DiveCalculatorInput @calculate="handleCalculate" />
             
+            <!-- Air Consumption Manager -->
+            <AirConsumptionManager v-model="airConsumptionData" />
+            
             <!-- Disclaimer -->
             <div class="cds--inline-notification cds--inline-notification--warning disclaimer-notification">
               <div class="cds--inline-notification__details">
@@ -116,7 +147,10 @@ const handleCalculate = (parameters: DiveParameters | MultiLevelDiveParameters) 
             />
 
             <!-- Results -->
-            <DiveProfileResults :profile="currentProfile" />
+            <DiveProfileResults :profile="currentProfile" :air-consumption="airConsumptionResult" />
+
+            <!-- Air Consumption Results -->
+            <AirConsumptionResults :result="airConsumptionResult" />
 
             <!-- Chart -->
             <DiveProfileChart :profile="currentProfile" />

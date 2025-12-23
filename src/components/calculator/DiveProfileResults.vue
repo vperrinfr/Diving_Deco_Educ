@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { DiveProfile } from '../../types';
+import type { AirConsumptionResult } from '../../types/airConsumption';
 import { isMultiLevelDive } from '../../types';
 import { formatGasMix } from '../../utils/gasMix';
 import { generateDivePlanPDF } from '../../services/pdfExportService';
@@ -10,8 +11,9 @@ import { useDiveSiteStore } from '../../stores/diveSiteStore';
 const { t } = useI18n();
 const diveSiteStore = useDiveSiteStore();
 
-defineProps<{
+const props = defineProps<{
   profile: DiveProfile | null;
+  airConsumption?: AirConsumptionResult | null;
 }>();
 
 const isExporting = ref(false);
@@ -39,7 +41,8 @@ const handleExportPDF = async (profile: DiveProfile) => {
       profile,
       diverInfo,
       diveSite: diveSiteStore.currentSite || undefined,
-      weather: diveSiteStore.weatherConditions || undefined
+      weather: diveSiteStore.weatherConditions || undefined,
+      airConsumption: props.airConsumption || undefined
     });
     
   } catch (error) {

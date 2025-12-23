@@ -240,6 +240,290 @@
       "point2": "Never dive beyond your training and certification level",
       "point3": "Always consult a qualified professional for technical dive planning",
       "point4": "Calculations are provided for informational purposes and do not guarantee dive safety"
+    },
+    "education": {
+      "title": "Diving Concepts",
+      "subtitle": "Understanding the fundamentals of decompression",
+      "gradientFactorsSection": {
+        "title": "What are Gradient Factors?",
+        "intro": "Gradient Factors (GF) are a concept developed by Erik Baker to control the level of conservatism in decompression calculations based on the Bühlmann algorithm.",
+        "whatAreGF": {
+          "title": "Definition",
+          "description": "GFs are expressed as two values: <strong>GF Low/GF High</strong> (e.g., 30/70 or 40/85). These values represent percentages that modify the supersaturation limits tolerated by the Bühlmann algorithm."
+        },
+        "howTheyWork": {
+          "title": "How do they work?",
+          "gfLow": "<strong>GF Low</strong>: Applies to the first decompression stop (the deepest). A lower value means you start decompression earlier and deeper.",
+          "gfHigh": "<strong>GF High</strong>: Applies to the last stop (usually at the surface). A lower value means you spend more time decompressing before ascending.",
+          "gradient": "Between these two points, the GF increases linearly as depth decreases."
+        },
+        "examples": {
+          "title": "Practical Examples",
+          "conservative": "<strong>30/70 (Conservative)</strong>: Deeper and longer stops. Ideal for cold dives, after a break, or for cautious divers.",
+          "moderate": "<strong>40/85 (Moderate)</strong>: Standard balance between safety and efficiency. Suitable for most recreational dives.",
+          "aggressive": "<strong>50/95 (Aggressive)</strong>: Shorter and shallower stops. Reserved for experienced divers in excellent physical condition."
+        },
+        "impact": {
+          "title": "Impact on your dive",
+          "decoTime": "Lower GFs = longer decompression times but safer profile",
+          "risk": "Higher GFs = shorter decompression times but increased risk of decompression sickness",
+          "recommendation": "It is recommended to start with conservative values and adjust gradually based on your experience."
+        }
+      },
+      "ndlSection": {
+        "title": "What is NDL (No Decompression Limit)?",
+        "definition": {
+          "title": "Definition",
+          "description": "The NDL (No Decompression Limit) is the maximum time you can spend at a given depth without needing to make mandatory decompression stops during ascent."
+        },
+        "howItWorks": {
+          "title": "How does it work?",
+          "saturation": "During the dive, your body absorbs nitrogen (and helium if using trimix). The longer you stay and the deeper you go, the more your tissues become saturated with inert gases.",
+          "limit": "The NDL is the point where your tissues reach a saturation level that requires controlled decompression to avoid the formation of dangerous bubbles.",
+          "calculation": "It is calculated in real-time by the Bühlmann algorithm by monitoring 16 different tissue compartments, each with different absorption and elimination rates."
+        },
+        "factors": {
+          "title": "Factors that influence NDL",
+          "depth": "<strong>Depth</strong>: The deeper you go, the shorter the NDL (e.g., 10m = ~200 min, 30m = ~20 min, 40m = ~9 min)",
+          "gas": "<strong>Gas mix</strong>: Nitrox increases NDL because it contains less nitrogen",
+          "altitude": "<strong>Altitude</strong>: At altitude, NDL is reduced due to lower atmospheric pressure",
+          "gf": "<strong>Gradient Factors</strong>: More conservative GFs reduce NDL"
+        },
+        "practical": {
+          "title": "Practical use",
+          "planning": "Use NDL to plan no-decompression dives (recreational dives)",
+          "monitoring": "Always monitor your dive computer which calculates NDL in real-time",
+          "safety": "Always stay below NDL with a safety margin",
+          "multilevel": "Multi-level dives allow you to optimize dive time while respecting NDL"
+        }
+      },
+      "decoStopsSection": {
+        "title": "Why make decompression stops?",
+        "introduction": {
+          "title": "The decompression problem",
+          "description": "When you dive, your body absorbs inert gases (nitrogen and helium) under pressure. If you ascend too quickly, these gases can form bubbles in your tissues and blood, causing decompression sickness (DCS)."
+        },
+        "purpose": {
+          "title": "The role of stops",
+          "elimination": "<strong>Controlled elimination</strong>: Stops allow your body to gradually eliminate inert gases dissolved in your tissues",
+          "prevention": "<strong>Bubble prevention</strong>: By ascending slowly and making pauses, you reduce the pressure gradient and prevent the formation of dangerous bubbles",
+          "equilibrium": "<strong>Tissue equilibrium</strong>: Each stop allows different tissue compartments to re-equilibrate with ambient pressure"
+        },
+        "types": {
+          "title": "Types of stops",
+          "mandatory": "<strong>Mandatory stops</strong>: Required when you exceed NDL. Not respecting them can lead to severe DCS.",
+          "safety": "<strong>Safety stop</strong>: Recommended even for no-decompression dives (3 minutes at 5 meters). Adds an extra safety margin.",
+          "deep": "<strong>Deep stops</strong>: With low GFs, you start decompression deeper, which can reduce stress on fast tissues."
+        },
+        "schedule": {
+          "title": "How to read a stop schedule",
+          "depth": "<strong>Stop depth</strong>: Indicates at what depth you must stop (e.g., 9m, 6m, 3m)",
+          "duration": "<strong>Stop duration</strong>: Time to spend at this depth (e.g., 2 minutes, 5 minutes)",
+          "runtime": "<strong>Runtime</strong>: Total time elapsed since the start of the dive",
+          "gas": "<strong>Gas to use</strong>: Which gas mix to use during this stop (important for multi-gas dives)"
+        },
+        "example": {
+          "title": "Example of reading a profile",
+          "scenario": "Dive to 40m for 25 minutes with Air (21% O₂)",
+          "step1": "1. Descent to 40m (2 minutes at 20m/min)",
+          "step2": "2. Bottom time at 40m (25 minutes)",
+          "step3": "3. Ascent to first stop at 9m",
+          "step4": "4. Stop at 9m for 2 minutes",
+          "step5": "5. Stop at 6m for 4 minutes",
+          "step6": "6. Stop at 3m for 8 minutes",
+          "step7": "7. Final ascent to surface",
+          "total": "Total dive time: ~45 minutes (including ~14 minutes of decompression)"
+        },
+        "safety": {
+          "title": "Essential safety rules",
+          "never": "<strong>Never</strong> skip or shorten a mandatory stop",
+          "ascent": "Respect ascent rate (maximum 10m/min, ideally 9m/min)",
+          "computer": "Always follow your primary dive computer",
+          "backup": "Have a backup computer or dive tables",
+          "conservative": "When in doubt, be more conservative (longer stops)"
+        }
+      },
+      "profileReadingSection": {
+        "title": "How to read a dive profile",
+        "introduction": {
+          "title": "Understanding the graph",
+          "description": "A dive profile is a visual representation of your dive showing depth as a function of time. It's an essential tool for planning and analyzing your dives."
+        },
+        "axes": {
+          "title": "Graph axes",
+          "horizontal": "<strong>Horizontal axis (X)</strong>: Represents time elapsed since the start of the dive in minutes",
+          "vertical": "<strong>Vertical axis (Y)</strong>: Represents depth in meters (or feet). Note that 0m is at the top and depth increases downward"
+        },
+        "phases": {
+          "title": "Phases of a dive",
+          "descent": "<strong>Descent</strong>: Diagonal line descending from the start of the dive. The slope indicates descent rate (typically 20m/min).",
+          "bottom": "<strong>Bottom time</strong>: Horizontal or slightly inclined line at maximum depth. This is the main phase of the dive.",
+          "ascent": "<strong>Ascent</strong>: Diagonal line ascending. May be interrupted by stops (horizontal plateaus).",
+          "stops": "<strong>Stops</strong>: Horizontal plateaus during ascent. The longer the plateau, the more important the stop.",
+          "surface": "<strong>Surface</strong>: Return to 0m, end of dive."
+        },
+        "colors": {
+          "title": "Color code (if applicable)",
+          "descent": "🔵 <strong>Blue</strong>: Descent phase",
+          "bottom": "🟢 <strong>Green</strong>: Bottom time (within NDL limits)",
+          "deco": "🟡 <strong>Yellow</strong>: Mandatory decompression stops",
+          "safety": "🟠 <strong>Orange</strong>: Recommended safety stop",
+          "danger": "🔴 <strong>Red</strong>: Dangerous zone or warning"
+        },
+        "information": {
+          "title": "Key information to identify",
+          "maxDepth": "<strong>Maximum depth</strong>: The lowest point of the profile",
+          "totalTime": "<strong>Total time</strong>: Total horizontal distance of the graph",
+          "decoStops": "<strong>Stops</strong>: Number and duration of horizontal plateaus during ascent",
+          "ndl": "<strong>NDL moment</strong>: Point where the dive transitions from 'no-decompression' to 'decompression'",
+          "gasSwitches": "<strong>Gas switches</strong>: Markers indicating when to change gas mix"
+        },
+        "multiLevel": {
+          "title": "Multi-level profiles",
+          "description": "Multi-level dives have multiple plateaus at different depths:",
+          "advantage": "Allow you to optimize dive time by progressively moving to shallower depths",
+          "calculation": "NDL is continuously recalculated based on accumulated nitrogen loading",
+          "planning": "Require more precise planning but offer more flexibility"
+        },
+        "practical": {
+          "title": "Practical tips",
+          "before": "<strong>Before the dive</strong>: Study the planned profile, identify stops and critical points",
+          "during": "<strong>During the dive</strong>: Follow your computer which displays the profile in real-time",
+          "after": "<strong>After the dive</strong>: Analyze the actual profile to improve future planning",
+          "compare": "<strong>Comparison</strong>: Compare planned profile with actual profile to identify deviations"
+        }
+      }
+    }
+  },
+  "airConsumption": {
+    "title": "Air Consumption Management",
+    "description": "Configure your air consumption and cylinders to estimate your dive autonomy",
+    "sacRate": {
+      "title": "Surface Air Consumption (SAC) Rate",
+      "description": "Your air consumption in liters per minute at the surface. Varies with effort and experience.",
+      "label": "SAC Rate"
+    },
+    "activityLevels": {
+      "resting": "Resting (15 L/min)",
+      "light": "Light (20 L/min)",
+      "moderate": "Moderate (25 L/min)",
+      "heavy": "Heavy (30 L/min)"
+    },
+    "reservePressure": {
+      "title": "Reserve Pressure",
+      "description": "Minimum pressure to keep in your cylinders for safety.",
+      "label": "Reserve Pressure"
+    },
+    "cylinders": {
+      "title": "Cylinder Configuration",
+      "description": "Add and configure the cylinders you will use for this dive.",
+      "addButton": "Add Cylinder",
+      "removeButton": "Remove",
+      "empty": "No cylinders configured. Click 'Add Cylinder' to start.",
+      "type": "Cylinder Type",
+      "startPressure": "Start Pressure",
+      "gasType": "Gas Type",
+      "gasTypes": {
+        "bottom": "Bottom Gas",
+        "deco": "Decompression Gas",
+        "bailout": "Bailout Gas"
+      },
+      "capacity": "Capacity",
+      "totalAir": "Total Available Air"
+    },
+    "summary": {
+      "totalCapacity": "Total Capacity",
+      "numberOfCylinders": "Number of Cylinders"
+    },
+    "results": {
+      "title": "Consumption Analysis",
+      "airNeeded": "Air Needed",
+      "airAvailable": "Air Available",
+      "sufficient": "Sufficient",
+      "insufficient": "Insufficient",
+      "cylinderUsage": "Cylinder Usage",
+      "startPressure": "Start Pressure",
+      "endPressure": "End Pressure",
+      "used": "Used",
+      "warnings": "Warnings"
+    },
+    "education": {
+      "title": "Understanding Air Consumption",
+      "sacRate": {
+        "title": "What is SAC Rate?",
+        "definition": "SAC (Surface Air Consumption) is your air consumption in liters per minute at the surface (1 bar pressure).",
+        "calculation": "To calculate your SAC: divide air consumed by absolute pressure and dive time.",
+        "factors": {
+          "title": "Factors that influence SAC",
+          "experience": "<strong>Experience</strong>: Experienced divers generally consume less (better breathing control)",
+          "effort": "<strong>Physical effort</strong>: The harder you work, the more you consume",
+          "stress": "<strong>Stress</strong>: Anxiety increases consumption",
+          "temperature": "<strong>Temperature</strong>: Cold water increases consumption",
+          "equipment": "<strong>Equipment</strong>: Poorly adjusted equipment can increase effort"
+        },
+        "typical": {
+          "title": "Typical values",
+          "beginner": "Beginner: 25-30 L/min",
+          "intermediate": "Intermediate: 20-25 L/min",
+          "advanced": "Advanced: 15-20 L/min",
+          "professional": "Professional: 12-15 L/min"
+        }
+      },
+      "cylinderSize": {
+        "title": "Cylinder Sizes",
+        "description": "Cylinders are defined by their volume in liters and working pressure in bars.",
+        "common": {
+          "title": "Common sizes",
+          "single12": "<strong>12L 200 bar</strong>: Standard for recreational diving (2400L of air)",
+          "single15": "<strong>15L 200 bar</strong>: More autonomy (3000L of air)",
+          "double12": "<strong>Twin 2×12L</strong>: Technical diving (4800L of air)",
+          "stage": "<strong>7L 300 bar</strong>: Decompression cylinder (2100L of air)",
+          "pony": "<strong>6L 207 bar</strong>: Bailout cylinder (1242L of air)"
+        },
+        "calculation": {
+          "title": "Calculating available air",
+          "formula": "Available air (L) = Volume (L) × Pressure (bar)",
+          "example": "Example: 12L at 200 bar = 2400L of air at surface"
+        }
+      },
+      "planning": {
+        "title": "Air Planning",
+        "ruleOfThirds": {
+          "title": "Rule of Thirds",
+          "description": "Divide your air into three: 1/3 for outbound, 1/3 for return, 1/3 reserve.",
+          "use": "Used in cave and technical diving to ensure a safety margin."
+        },
+        "turnPressure": {
+          "title": "Turn Pressure",
+          "description": "The pressure at which you must start ascending or returning.",
+          "calculation": "Calculated based on the chosen rule (thirds, halves) and reserve pressure."
+        },
+        "contingency": {
+          "title": "Contingency Planning",
+          "buddy": "Plan air to assist a buddy in distress",
+          "stress": "Add 25-50% for stress and unexpected effort",
+          "deco": "Plan extra air for decompression stops",
+          "reserve": "Always keep a safety reserve (50 bar minimum)"
+        }
+      },
+      "multiCylinder": {
+        "title": "Multi-Cylinder Dives",
+        "description": "Using multiple cylinders optimizes autonomy and safety.",
+        "types": {
+          "title": "Configuration types",
+          "sidemount": "<strong>Sidemount</strong>: Two cylinders on the sides, easy access",
+          "backmount": "<strong>Backmount</strong>: Twin cylinders on back, large capacity",
+          "stage": "<strong>Stage/Deco</strong>: Additional cylinders for decompression",
+          "bailout": "<strong>Bailout</strong>: Emergency cylinder for rebreathers"
+        },
+        "advantages": {
+          "title": "Advantages",
+          "redundancy": "Redundancy in case of equipment failure",
+          "capacity": "Greater total air capacity",
+          "optimization": "Gas mix optimization (bottom vs deco)",
+          "safety": "Increased safety margin"
+        }
+      }
     }
   },
   "diveSite": {

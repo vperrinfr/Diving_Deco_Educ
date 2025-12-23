@@ -170,6 +170,27 @@ export function calculateDiveProfile(parameters: DiveParameters): DiveProfile {
     });
   }
   
+  // Create segments for air consumption calculation
+  const segments: DiveSegment[] = [];
+  
+  // Add bottom segment
+  segments.push({
+    depth: depth,
+    duration: bottomTime,
+    gasMix: gasMix,
+    segmentType: 'bottom'
+  });
+  
+  // Add decompression stops as segments
+  stops.forEach(stop => {
+    segments.push({
+      depth: stop.depth,
+      duration: stop.duration,
+      gasMix: stop.gasMix,
+      segmentType: 'deco'
+    });
+  });
+  
   return {
     parameters,
     decompressionStops: stops,
@@ -179,7 +200,8 @@ export function calculateDiveProfile(parameters: DiveParameters): DiveProfile {
     tissueCompartments: tissues,
     warnings,
     maxDepth: depth,
-    averageDepth: depth // Simplified for single-level dive
+    averageDepth: depth, // Simplified for single-level dive
+    segments
   };
 }
 
@@ -539,6 +561,16 @@ export function calculateMultiLevelDiveProfile(
       details: 'Unable to calculate safe decompression schedule. Dive may be too extreme.'
     });
   }
+  
+  // Add decompression stops as segments for air consumption calculation
+  stops.forEach(stop => {
+    processedSegments.push({
+      depth: stop.depth,
+      duration: stop.duration,
+      gasMix: stop.gasMix,
+      segmentType: 'deco'
+    });
+  });
   
   const totalDecoTime = stops.reduce((sum, stop) => sum + stop.duration, 0);
   const ndl = calculateNDL(maxDepth, gasInventory.bottomGas, gradientFactorHigh);

@@ -240,6 +240,290 @@
       "point2": "Ne plongez jamais au-delà de votre niveau de formation et de certification",
       "point3": "Consultez toujours un professionnel qualifié pour la planification de plongées techniques",
       "point4": "Les calculs sont fournis à titre indicatif et ne garantissent pas la sécurité de la plongée"
+    },
+    "education": {
+      "title": "Concepts de plongée",
+      "subtitle": "Comprendre les principes fondamentaux de la décompression",
+      "gradientFactorsSection": {
+        "title": "Qu'est-ce que les Gradient Factors ?",
+        "intro": "Les Gradient Factors (GF) sont un concept développé par Erik Baker pour contrôler le niveau de conservatisme dans les calculs de décompression basés sur l'algorithme Bühlmann.",
+        "whatAreGF": {
+          "title": "Définition",
+          "description": "Les GF sont exprimés sous forme de deux valeurs : <strong>GF Low/GF High</strong> (par exemple 30/70 ou 40/85). Ces valeurs représentent des pourcentages qui modifient les limites de sursaturation tolérées par l'algorithme Bühlmann."
+        },
+        "howTheyWork": {
+          "title": "Comment fonctionnent-ils ?",
+          "gfLow": "<strong>GF Low</strong> : S'applique au premier palier de décompression (le plus profond). Une valeur plus basse signifie que vous commencez la décompression plus tôt et plus profondément.",
+          "gfHigh": "<strong>GF High</strong> : S'applique au dernier palier (généralement en surface). Une valeur plus basse signifie que vous passez plus de temps en décompression avant de remonter.",
+          "gradient": "Entre ces deux points, le GF augmente linéairement avec la diminution de la profondeur."
+        },
+        "examples": {
+          "title": "Exemples pratiques",
+          "conservative": "<strong>30/70 (Conservateur)</strong> : Paliers plus profonds et plus longs. Idéal pour les plongées froides, après une pause, ou pour les plongeurs prudents.",
+          "moderate": "<strong>40/85 (Modéré)</strong> : Équilibre standard entre sécurité et efficacité. Convient à la plupart des plongées récréatives.",
+          "aggressive": "<strong>50/95 (Agressif)</strong> : Paliers plus courts et moins profonds. Réservé aux plongeurs expérimentés en excellente condition physique."
+        },
+        "impact": {
+          "title": "Impact sur votre plongée",
+          "decoTime": "Des GF plus bas = temps de décompression plus longs mais profil plus sûr",
+          "risk": "Des GF plus élevés = temps de décompression plus courts mais risque accru d'accident de décompression",
+          "recommendation": "Il est recommandé de commencer avec des valeurs conservatrices et d'ajuster progressivement selon votre expérience."
+        }
+      },
+      "ndlSection": {
+        "title": "Qu'est-ce que la NDL (No Decompression Limit) ?",
+        "definition": {
+          "title": "Définition",
+          "description": "La NDL (Limite Sans Palier) est le temps maximum que vous pouvez passer à une profondeur donnée sans avoir besoin de faire des paliers de décompression obligatoires lors de la remontée."
+        },
+        "howItWorks": {
+          "title": "Comment ça fonctionne ?",
+          "saturation": "Pendant la plongée, votre corps absorbe de l'azote (et de l'hélium si vous utilisez du trimix). Plus vous restez longtemps et plus vous êtes profond, plus vos tissus se saturent en gaz inertes.",
+          "limit": "La NDL est le point où vos tissus atteignent une saturation qui nécessite une décompression contrôlée pour éviter la formation de bulles dangereuses.",
+          "calculation": "Elle est calculée en temps réel par l'algorithme Bühlmann en surveillant 16 compartiments tissulaires différents, chacun ayant des vitesses d'absorption et d'élimination différentes."
+        },
+        "factors": {
+          "title": "Facteurs qui influencent la NDL",
+          "depth": "<strong>Profondeur</strong> : Plus vous êtes profond, plus la NDL est courte (ex: 10m = ~200 min, 30m = ~20 min, 40m = ~9 min)",
+          "gas": "<strong>Mélange gazeux</strong> : Le nitrox augmente la NDL car il contient moins d'azote",
+          "altitude": "<strong>Altitude</strong> : En altitude, la NDL est réduite en raison de la pression atmosphérique plus basse",
+          "gf": "<strong>Gradient Factors</strong> : Des GF plus conservateurs réduisent la NDL"
+        },
+        "practical": {
+          "title": "Utilisation pratique",
+          "planning": "Utilisez la NDL pour planifier des plongées sans palier (plongées récréatives)",
+          "monitoring": "Surveillez toujours votre ordinateur de plongée qui calcule la NDL en temps réel",
+          "safety": "Restez toujours en dessous de la NDL avec une marge de sécurité",
+          "multilevel": "Les plongées multi-niveaux permettent d'optimiser le temps de plongée en respectant la NDL"
+        }
+      },
+      "decoStopsSection": {
+        "title": "Pourquoi faire des paliers de décompression ?",
+        "introduction": {
+          "title": "Le problème de la décompression",
+          "description": "Lorsque vous plongez, votre corps absorbe des gaz inertes (azote et hélium) sous pression. Si vous remontez trop vite, ces gaz peuvent former des bulles dans vos tissus et votre sang, causant un accident de décompression (ADD)."
+        },
+        "purpose": {
+          "title": "Le rôle des paliers",
+          "elimination": "<strong>Élimination contrôlée</strong> : Les paliers permettent à votre corps d'éliminer progressivement les gaz inertes dissous dans vos tissus",
+          "prevention": "<strong>Prévention des bulles</strong> : En remontant lentement et en faisant des pauses, vous réduisez le gradient de pression et empêchez la formation de bulles dangereuses",
+          "equilibrium": "<strong>Équilibre des tissus</strong> : Chaque palier permet aux différents compartiments tissulaires de se rééquilibrer avec la pression ambiante"
+        },
+        "types": {
+          "title": "Types de paliers",
+          "mandatory": "<strong>Paliers obligatoires</strong> : Requis lorsque vous dépassez la NDL. Ne pas les respecter peut entraîner un ADD grave.",
+          "safety": "<strong>Palier de sécurité</strong> : Recommandé même pour les plongées sans palier (3 minutes à 5 mètres). Ajoute une marge de sécurité supplémentaire.",
+          "deep": "<strong>Paliers profonds</strong> : Avec des GF bas, vous commencez la décompression plus profondément, ce qui peut réduire le stress sur les tissus rapides."
+        },
+        "schedule": {
+          "title": "Comment lire un programme de paliers",
+          "depth": "<strong>Profondeur du palier</strong> : Indique à quelle profondeur vous devez vous arrêter (ex: 9m, 6m, 3m)",
+          "duration": "<strong>Durée du palier</strong> : Temps à passer à cette profondeur (ex: 2 minutes, 5 minutes)",
+          "runtime": "<strong>Temps cumulé</strong> : Temps total écoulé depuis le début de la plongée",
+          "gas": "<strong>Gaz à utiliser</strong> : Quel mélange gazeux utiliser pendant ce palier (important pour les plongées multi-gaz)"
+        },
+        "example": {
+          "title": "Exemple de lecture d'un profil",
+          "scenario": "Plongée à 40m pendant 25 minutes avec Air (21% O₂)",
+          "step1": "1. Descente à 40m (2 minutes à 20m/min)",
+          "step2": "2. Temps de fond à 40m (25 minutes)",
+          "step3": "3. Remontée jusqu'au premier palier à 9m",
+          "step4": "4. Palier à 9m pendant 2 minutes",
+          "step5": "5. Palier à 6m pendant 4 minutes",
+          "step6": "6. Palier à 3m pendant 8 minutes",
+          "step7": "7. Remontée finale vers la surface",
+          "total": "Temps total de plongée : ~45 minutes (dont ~14 minutes de décompression)"
+        },
+        "safety": {
+          "title": "Règles de sécurité essentielles",
+          "never": "<strong>Ne jamais</strong> sauter ou raccourcir un palier obligatoire",
+          "ascent": "Respecter la vitesse de remontée (maximum 10m/min, idéalement 9m/min)",
+          "computer": "Toujours suivre votre ordinateur de plongée principal",
+          "backup": "Avoir un ordinateur de secours ou des tables de plongée en backup",
+          "conservative": "En cas de doute, soyez plus conservateur (paliers plus longs)"
+        }
+      },
+      "profileReadingSection": {
+        "title": "Comment lire un profil de plongée",
+        "introduction": {
+          "title": "Comprendre le graphique",
+          "description": "Un profil de plongée est une représentation visuelle de votre plongée montrant la profondeur en fonction du temps. C'est un outil essentiel pour planifier et analyser vos plongées."
+        },
+        "axes": {
+          "title": "Les axes du graphique",
+          "horizontal": "<strong>Axe horizontal (X)</strong> : Représente le temps écoulé depuis le début de la plongée en minutes",
+          "vertical": "<strong>Axe vertical (Y)</strong> : Représente la profondeur en mètres (ou pieds). Notez que 0m est en haut et la profondeur augmente vers le bas"
+        },
+        "phases": {
+          "title": "Les phases d'une plongée",
+          "descent": "<strong>Descente</strong> : Ligne diagonale descendante du début de la plongée. La pente indique la vitesse de descente (généralement 20m/min).",
+          "bottom": "<strong>Temps de fond</strong> : Ligne horizontale ou légèrement inclinée à la profondeur maximale. C'est la phase principale de la plongée.",
+          "ascent": "<strong>Remontée</strong> : Ligne diagonale montante. Peut être interrompue par des paliers (plateaux horizontaux).",
+          "stops": "<strong>Paliers</strong> : Plateaux horizontaux pendant la remontée. Plus le plateau est long, plus le palier est important.",
+          "surface": "<strong>Surface</strong> : Retour à 0m, fin de la plongée."
+        },
+        "colors": {
+          "title": "Code couleur (si applicable)",
+          "descent": "🔵 <strong>Bleu</strong> : Phase de descente",
+          "bottom": "🟢 <strong>Vert</strong> : Temps de fond (dans les limites NDL)",
+          "deco": "🟡 <strong>Jaune</strong> : Paliers de décompression obligatoires",
+          "safety": "🟠 <strong>Orange</strong> : Palier de sécurité recommandé",
+          "danger": "🔴 <strong>Rouge</strong> : Zone dangereuse ou avertissement"
+        },
+        "information": {
+          "title": "Informations clés à identifier",
+          "maxDepth": "<strong>Profondeur maximale</strong> : Le point le plus bas du profil",
+          "totalTime": "<strong>Temps total</strong> : Distance horizontale totale du graphique",
+          "decoStops": "<strong>Paliers</strong> : Nombre et durée des plateaux horizontaux pendant la remontée",
+          "ndl": "<strong>Moment NDL</strong> : Point où la plongée passe de 'sans palier' à 'avec palier'",
+          "gasSwitches": "<strong>Changements de gaz</strong> : Marqueurs indiquant quand changer de mélange gazeux"
+        },
+        "multiLevel": {
+          "title": "Profils multi-niveaux",
+          "description": "Les plongées multi-niveaux ont plusieurs plateaux à différentes profondeurs :",
+          "advantage": "Permettent d'optimiser le temps de plongée en passant progressivement à des profondeurs moins importantes",
+          "calculation": "La NDL est recalculée en continu en fonction de la charge azotée accumulée",
+          "planning": "Nécessitent une planification plus précise mais offrent plus de flexibilité"
+        },
+        "practical": {
+          "title": "Conseils pratiques",
+          "before": "<strong>Avant la plongée</strong> : Étudiez le profil planifié, identifiez les paliers et les points critiques",
+          "during": "<strong>Pendant la plongée</strong> : Suivez votre ordinateur qui affiche le profil en temps réel",
+          "after": "<strong>Après la plongée</strong> : Analysez le profil réel pour améliorer vos futures planifications",
+          "compare": "<strong>Comparaison</strong> : Comparez le profil planifié avec le profil réel pour identifier les écarts"
+        }
+      }
+    }
+  },
+  "airConsumption": {
+    "title": "Gestion de la consommation d'air",
+    "description": "Configurez votre consommation d'air et vos bouteilles pour estimer l'autonomie de votre plongée",
+    "sacRate": {
+      "title": "Taux de consommation en surface (SAC)",
+      "description": "Votre consommation d'air en litres par minute à la surface. Varie selon l'effort et l'expérience.",
+      "label": "SAC Rate"
+    },
+    "activityLevels": {
+      "resting": "Repos (15 L/min)",
+      "light": "Léger (20 L/min)",
+      "moderate": "Modéré (25 L/min)",
+      "heavy": "Intense (30 L/min)"
+    },
+    "reservePressure": {
+      "title": "Pression de réserve",
+      "description": "Pression minimale à conserver dans vos bouteilles pour la sécurité.",
+      "label": "Pression de réserve"
+    },
+    "cylinders": {
+      "title": "Configuration des bouteilles",
+      "description": "Ajoutez et configurez les bouteilles que vous utiliserez pour cette plongée.",
+      "addButton": "Ajouter une bouteille",
+      "removeButton": "Retirer",
+      "empty": "Aucune bouteille configurée. Cliquez sur 'Ajouter une bouteille' pour commencer.",
+      "type": "Type de bouteille",
+      "startPressure": "Pression initiale",
+      "gasType": "Type de gaz",
+      "gasTypes": {
+        "bottom": "Gaz de fond",
+        "deco": "Gaz de décompression",
+        "bailout": "Gaz de secours"
+      },
+      "capacity": "Capacité",
+      "totalAir": "Air total disponible"
+    },
+    "summary": {
+      "totalCapacity": "Capacité totale",
+      "numberOfCylinders": "Nombre de bouteilles"
+    },
+    "results": {
+      "title": "Analyse de consommation",
+      "airNeeded": "Air nécessaire",
+      "airAvailable": "Air disponible",
+      "sufficient": "Suffisant",
+      "insufficient": "Insuffisant",
+      "cylinderUsage": "Utilisation des bouteilles",
+      "startPressure": "Pression initiale",
+      "endPressure": "Pression finale",
+      "used": "Utilisé",
+      "warnings": "Avertissements"
+    },
+    "education": {
+      "title": "Comprendre la consommation d'air",
+      "sacRate": {
+        "title": "Qu'est-ce que le SAC Rate ?",
+        "definition": "Le SAC (Surface Air Consumption) est votre consommation d'air en litres par minute à la surface (1 bar de pression).",
+        "calculation": "Pour calculer votre SAC : divisez l'air consommé par la pression absolue et le temps de plongée.",
+        "factors": {
+          "title": "Facteurs qui influencent le SAC",
+          "experience": "<strong>Expérience</strong> : Les plongeurs expérimentés consomment généralement moins (meilleur contrôle de la respiration)",
+          "effort": "<strong>Effort physique</strong> : Plus vous travaillez dur, plus vous consommez",
+          "stress": "<strong>Stress</strong> : L'anxiété augmente la consommation",
+          "temperature": "<strong>Température</strong> : L'eau froide augmente la consommation",
+          "equipment": "<strong>Équipement</strong> : Un équipement mal ajusté peut augmenter l'effort"
+        },
+        "typical": {
+          "title": "Valeurs typiques",
+          "beginner": "Débutant : 25-30 L/min",
+          "intermediate": "Intermédiaire : 20-25 L/min",
+          "advanced": "Avancé : 15-20 L/min",
+          "professional": "Professionnel : 12-15 L/min"
+        }
+      },
+      "cylinderSize": {
+        "title": "Tailles de bouteilles",
+        "description": "Les bouteilles sont définies par leur volume en litres et leur pression de service en bars.",
+        "common": {
+          "title": "Tailles courantes",
+          "single12": "<strong>12L 200 bar</strong> : Standard pour la plongée récréative (2400L d'air)",
+          "single15": "<strong>15L 200 bar</strong> : Plus d'autonomie (3000L d'air)",
+          "double12": "<strong>Bi-bouteille 2×12L</strong> : Plongée technique (4800L d'air)",
+          "stage": "<strong>7L 300 bar</strong> : Bouteille de décompression (2100L d'air)",
+          "pony": "<strong>6L 207 bar</strong> : Bouteille de secours (1242L d'air)"
+        },
+        "calculation": {
+          "title": "Calcul de l'air disponible",
+          "formula": "Air disponible (L) = Volume (L) × Pression (bar)",
+          "example": "Exemple : 12L à 200 bar = 2400L d'air à la surface"
+        }
+      },
+      "planning": {
+        "title": "Planification de l'air",
+        "ruleOfThirds": {
+          "title": "Règle des tiers",
+          "description": "Divisez votre air en trois : 1/3 pour l'aller, 1/3 pour le retour, 1/3 de réserve.",
+          "use": "Utilisée en plongée souterraine et technique pour garantir une marge de sécurité."
+        },
+        "turnPressure": {
+          "title": "Pression de retour",
+          "description": "La pression à laquelle vous devez commencer à remonter ou revenir.",
+          "calculation": "Calculée en fonction de la règle choisie (tiers, moitié) et de la pression de réserve."
+        },
+        "contingency": {
+          "title": "Planification de contingence",
+          "buddy": "Prévoir de l'air pour aider un binôme en difficulté",
+          "stress": "Ajouter 25-50% pour le stress et l'effort imprévu",
+          "deco": "Prévoir de l'air supplémentaire pour les paliers de décompression",
+          "reserve": "Toujours garder une réserve de sécurité (50 bar minimum)"
+        }
+      },
+      "multiCylinder": {
+        "title": "Plongées multi-bouteilles",
+        "description": "L'utilisation de plusieurs bouteilles permet d'optimiser l'autonomie et la sécurité.",
+        "types": {
+          "title": "Types de configurations",
+          "sidemount": "<strong>Sidemount</strong> : Deux bouteilles sur les côtés, accès facile",
+          "backmount": "<strong>Backmount</strong> : Bi-bouteille dans le dos, grande capacité",
+          "stage": "<strong>Stage/Deco</strong> : Bouteilles supplémentaires pour la décompression",
+          "bailout": "<strong>Bailout</strong> : Bouteille de secours pour les recycleurs"
+        },
+        "advantages": {
+          "title": "Avantages",
+          "redundancy": "Redondance en cas de panne d'équipement",
+          "capacity": "Plus grande capacité d'air totale",
+          "optimization": "Optimisation des mélanges gazeux (fond vs déco)",
+          "safety": "Marge de sécurité accrue"
+        }
+      }
     }
   },
   "diveSite": {
