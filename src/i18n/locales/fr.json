@@ -259,6 +259,10 @@
       "location": "Localisation",
       "latitude": "Latitude",
       "longitude": "Longitude",
+      "coordinateFormat": "Format des coordonnées",
+      "coordinateFormatInfo": "Utilisez le format décimal (ex: 43.7034 pour la latitude, 7.2663 pour la longitude). Les valeurs positives sont Nord/Est, les valeurs négatives sont Sud/Ouest.",
+      "coordinateExample": "Exemple: Nice, France = 43.7034, 7.2663",
+      "enterCoordinates": "Entrez les coordonnées pour afficher la carte",
       "address": "Adresse (optionnel)",
       "addressPlaceholder": "Ex: Port de Nice, France",
       "altitude": "Altitude",
@@ -266,6 +270,7 @@
       "waterTemperature": "Température de l'eau",
       "temperatureUnit": "°C",
       "useEstimated": "Utiliser la température estimée",
+      "estimatedTempInfo": "Comment ça marche ?",
       "fetchWeather": "Récupérer la météo",
       "saveSite": "Enregistrer le site",
       "clearForm": "Effacer"
@@ -311,6 +316,52 @@
       "invalidLongitude": "Longitude invalide (-180 à 180)",
       "invalidAltitude": "Altitude invalide",
       "invalidTemperature": "Température invalide"
+    },
+    "estimatedTemp": {
+      "title": "Estimation de la température de l'eau",
+      "subtitle": "Fonctionnement de l'algorithme",
+      "intro": "L'algorithme d'estimation de la température de l'eau prend en compte plusieurs facteurs pour fournir une valeur approximative basée sur la température de l'air et les conditions environnementales.",
+      "parameters": {
+        "title": "Paramètres d'entrée",
+        "airTemp": "Température de l'air (°C)",
+        "month": "Mois actuel (0-11)",
+        "waterType": "Type d'eau (mer, lac, rivière, carrière)"
+      },
+      "calculation": {
+        "title": "Méthode de calcul",
+        "step1": {
+          "title": "1. Facteur de retard thermique",
+          "description": "L'eau se réchauffe et se refroidit plus lentement que l'air :",
+          "sea": "Mer : 0.7 (plus d'inertie thermique)",
+          "lake": "Lac : 0.8"
+        },
+        "step2": {
+          "title": "2. Ajustement saisonnier",
+          "description": "Utilise une fonction sinusoïdale basée sur le mois :",
+          "formula": "Math.sin((mois - 2) × π / 6) × 5",
+          "note": "Décalage de 2 mois pour l'hémisphère nord"
+        },
+        "step3": {
+          "title": "3. Caractéristiques par type d'eau",
+          "sea": "Mer : température minimale de 10°C",
+          "lake": "Lac : température minimale de 4°C (point de densité maximale)",
+          "river": "Rivière : 85% de la température de l'air",
+          "quarry": "Carrière : -3°C par rapport au calcul de base, minimum 6°C"
+        },
+        "step4": {
+          "title": "4. Résultat",
+          "description": "Arrondi à 0.1°C près"
+        }
+      },
+      "example": {
+        "title": "Exemple de calcul",
+        "scenario": "Pour une température d'air de 20°C en juillet (mois 6) dans la mer :",
+        "base": "Base : 20 × 0.7 = 14°C",
+        "seasonal": "Ajustement saisonnier : +4.3°C",
+        "result": "Température estimée : ~18.3°C (avec minimum de 10°C)"
+      },
+      "disclaimer": "Cette estimation est approximative et devrait idéalement être remplacée par des capteurs de température réels pour plus de précision.",
+      "close": "Fermer"
     }
   },
   "diverInfo": {

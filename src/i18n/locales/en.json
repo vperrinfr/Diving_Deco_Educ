@@ -259,6 +259,10 @@
       "location": "Location",
       "latitude": "Latitude",
       "longitude": "Longitude",
+      "coordinateFormat": "Coordinate Format",
+      "coordinateFormatInfo": "Use decimal format (e.g., 43.7034 for latitude, 7.2663 for longitude). Positive values are North/East, negative values are South/West.",
+      "coordinateExample": "Example: Nice, France = 43.7034, 7.2663",
+      "enterCoordinates": "Enter coordinates to display the map",
       "address": "Address (optional)",
       "addressPlaceholder": "e.g., Nice Harbor, France",
       "altitude": "Altitude",
@@ -266,6 +270,7 @@
       "waterTemperature": "Water Temperature",
       "temperatureUnit": "°C",
       "useEstimated": "Use estimated temperature",
+      "estimatedTempInfo": "How does it work?",
       "fetchWeather": "Fetch Weather",
       "saveSite": "Save Site",
       "clearForm": "Clear"
@@ -311,6 +316,52 @@
       "invalidLongitude": "Invalid longitude (-180 to 180)",
       "invalidAltitude": "Invalid altitude",
       "invalidTemperature": "Invalid temperature"
+    },
+    "estimatedTemp": {
+      "title": "Water Temperature Estimation",
+      "subtitle": "How the algorithm works",
+      "intro": "The water temperature estimation algorithm takes into account several factors to provide an approximate value based on air temperature and environmental conditions.",
+      "parameters": {
+        "title": "Input Parameters",
+        "airTemp": "Air temperature (°C)",
+        "month": "Current month (0-11)",
+        "waterType": "Water type (sea, lake, river, quarry)"
+      },
+      "calculation": {
+        "title": "Calculation Method",
+        "step1": {
+          "title": "1. Thermal Lag Factor",
+          "description": "Water heats and cools more slowly than air:",
+          "sea": "Sea: 0.7 (higher thermal inertia)",
+          "lake": "Lake: 0.8"
+        },
+        "step2": {
+          "title": "2. Seasonal Adjustment",
+          "description": "Uses a sinusoidal function based on the month:",
+          "formula": "Math.sin((month - 2) × π / 6) × 5",
+          "note": "2-month offset for Northern Hemisphere"
+        },
+        "step3": {
+          "title": "3. Water Type Characteristics",
+          "sea": "Sea: minimum temperature of 10°C",
+          "lake": "Lake: minimum temperature of 4°C (maximum density point)",
+          "river": "River: 85% of air temperature",
+          "quarry": "Quarry: -3°C from base calculation, minimum 6°C"
+        },
+        "step4": {
+          "title": "4. Result",
+          "description": "Rounded to 0.1°C"
+        }
+      },
+      "example": {
+        "title": "Calculation Example",
+        "scenario": "For an air temperature of 20°C in July (month 6) in the sea:",
+        "base": "Base: 20 × 0.7 = 14°C",
+        "seasonal": "Seasonal adjustment: +4.3°C",
+        "result": "Estimated temperature: ~18.3°C (with minimum of 10°C)"
+      },
+      "disclaimer": "This estimation is approximate and should ideally be replaced by actual temperature sensors for greater accuracy.",
+      "close": "Close"
     }
   },
   "diverInfo": {
