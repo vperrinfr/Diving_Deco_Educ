@@ -12,8 +12,15 @@ dist
 dist-ssr
 *.local
 
-# Diver information (sensitive data)
+# Environment variables (sensitive data)
+.env
+.env.local
+.env.production
+.env.development
 diver.env
+
+# Security audit reports (may contain sensitive info)
+security-audit.json
 
 # Editor directories and files
 .vscode/*
@@ -25,3 +32,9 @@ diver.env
 *.njsproj
 *.sln
 *.sw?
+
+# Vercel
+.vercel
+
+# Railway
+.railway
