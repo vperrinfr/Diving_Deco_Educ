@@ -9,11 +9,16 @@ import WarningsDisplay from '../components/common/WarningsDisplay.vue';
 import LanguageSwitcher from '../components/common/LanguageSwitcher.vue';
 import AirConsumptionManager from '../components/calculator/AirConsumptionManager.vue';
 import AirConsumptionResults from '../components/calculator/AirConsumptionResults.vue';
+import ModelSelector from '../components/comparison/ModelSelector.vue';
+import ComparisonResults from '../components/comparison/ComparisonResults.vue';
+import ComparisonChart from '../components/comparison/ComparisonChart.vue';
 import { calculateDiveProfile, calculateMultiLevelDiveProfile } from '../utils/buhlmann/decompression';
 import { calculateAirConsumption } from '../services/airConsumptionService';
+import { compareDecompressionModels, exportComparisonText } from '../services/modelComparisonService';
 import { isMultiLevelDive } from '../types';
 import type { DiveParameters, MultiLevelDiveParameters, DiveProfile, DiveSegment } from '../types';
 import type { AirConsumptionData, AirConsumptionResult } from '../types/airConsumption';
+import type { DecompressionModel, ComparisonResult } from '../types/decoModels';
 import { STANDARD_CYLINDERS } from '../types/airConsumption';
 
 const router = useRouter();
@@ -33,6 +38,11 @@ const airConsumptionData = ref<AirConsumptionData>({
 });
 const airConsumptionResult = ref<AirConsumptionResult | null>(null);
 
+// Comparison state
+const activeTab = ref<'results' | 'comparison'>('results');
+const comparisonResult = ref<ComparisonResult | null>(null);
+const lastParameters = ref<DiveParameters | null>(null);
+
 const goHome = () => {
   router.push('/');
 };
@@ -46,11 +56,11 @@ const handleCalculate = (parameters: DiveParameters | MultiLevelDiveParameters) 
         currentProfile.value = calculateMultiLevelDiveProfile(parameters);
       } else {
         currentProfile.value = calculateDiveProfile(parameters);
+        // Store parameters for comparison (only simple dives supported for now)
+        lastParameters.value = parameters as DiveParameters;
       }
       
       // Calculate air consumption if profile is available
-      // Both calculateDiveProfile and calculateMultiLevelDiveProfile now return segments
-      // that include bottom time and decompression stops
       if (currentProfile.value && currentProfile.value.segments && currentProfile.value.segments.length > 0) {
         airConsumptionResult.value = calculateAirConsumption(
           currentProfile.value.segments,
@@ -65,6 +75,39 @@ const handleCalculate = (parameters: DiveParameters | MultiLevelDiveParameters) 
       isCalculating.value = false;
     }
   }, 300);
+};
+
+const handleModelsSelected = (models: DecompressionModel[]) => {
+  if (!lastParameters.value) {
+    alert('Please calculate a dive profile first');
+    return;
+  }
+  
+  isCalculating.value = true;
+  
+  setTimeout(() => {
+    try {
+      comparisonResult.value = compareDecompressionModels(lastParameters.value!, models);
+    } catch (error) {
+      console.error('Error comparing models:', error);
+      alert('An error occurred while comparing models.');
+    } finally {
+      isCalculating.value = false;
+    }
+  }, 300);
+};
+
+const handleExportComparison = () => {
+  if (!comparisonResult.value) return;
+  
+  const text = exportComparisonText(comparisonResult.value);
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'model-comparison.txt';
+  a.click();
+  URL.revokeObjectURL(url);
 };
 </script>
 
@@ -140,20 +183,60 @@ const handleCalculate = (parameters: DiveParameters | MultiLevelDiveParameters) 
 
           <!-- Right Column - Results -->
           <div class="cds--col-lg-12 cds--col-md-8 cds--col-sm-4">
-            <!-- Warnings -->
-            <WarningsDisplay 
-              v-if="currentProfile?.warnings"
-              :warnings="currentProfile.warnings"
-            />
+            <!-- Tabs -->
+            <div class="tabs-container">
+              <div class="tabs-header">
+                <button
+                  class="tab-button"
+                  :class="{ 'tab-button--active': activeTab === 'results' }"
+                  @click="activeTab = 'results'"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M3 3h14v2H3V3zm0 4h14v2H3V7zm0 4h14v2H3v-2zm0 4h10v2H3v-2z"/>
+                  </svg>
+                  <span>{{ t('results.title') }}</span>
+                </button>
+                <button
+                  class="tab-button"
+                  :class="{ 'tab-button--active': activeTab === 'comparison' }"
+                  @click="activeTab = 'comparison'"
+                  :disabled="!lastParameters"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M3 3h6v6H3V3zm8 0h6v6h-6V3zM3 11h6v6H3v-6zm8 0h6v6h-6v-6z"/>
+                  </svg>
+                  <span>{{ t('comparison.title') }}</span>
+                </button>
+              </div>
+            </div>
 
-            <!-- Results -->
-            <DiveProfileResults :profile="currentProfile" :air-consumption="airConsumptionResult" />
+            <!-- Results Tab -->
+            <div v-show="activeTab === 'results'">
+              <!-- Warnings -->
+              <WarningsDisplay
+                v-if="currentProfile?.warnings"
+                :warnings="currentProfile.warnings"
+              />
 
-            <!-- Air Consumption Results -->
-            <AirConsumptionResults :result="airConsumptionResult" />
+              <!-- Results -->
+              <DiveProfileResults :profile="currentProfile" :air-consumption="airConsumptionResult" />
 
-            <!-- Chart -->
-            <DiveProfileChart :profile="currentProfile" />
+              <!-- Air Consumption Results -->
+              <AirConsumptionResults :result="airConsumptionResult" />
+
+              <!-- Chart -->
+              <DiveProfileChart :profile="currentProfile" />
+            </div>
+
+            <!-- Comparison Tab -->
+            <div v-show="activeTab === 'comparison'">
+              <ModelSelector @models-selected="handleModelsSelected" />
+              
+              <div v-if="comparisonResult" class="comparison-content">
+                <ComparisonResults :result="comparisonResult" @export="handleExportComparison" />
+                <ComparisonChart :result="comparisonResult" />
+              </div>
+            </div>
 
             <!-- Additional Information -->
             <div v-if="currentProfile" class="cds--tile info-tile">
@@ -544,3 +627,61 @@ const handleCalculate = (parameters: DiveParameters | MultiLevelDiveParameters) 
   }
 }
 </style>
+/* Tabs Styles */
+.tabs-container {
+  background: #fff;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tabs-header {
+  display: flex;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #525252;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  bottom: -2px;
+}
+
+.tab-button:hover:not(:disabled) {
+  background-color: #f4f4f4;
+  color: #161616;
+}
+
+.tab-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tab-button--active {
+  color: #0f62fe;
+  border-bottom-color: #0f62fe;
+  background-color: #fff;
+}
+
+.tab-button svg {
+  flex-shrink: 0;
+}
+
+.comparison-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
