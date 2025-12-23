@@ -240,8 +240,71 @@
       "point2": "Never dive beyond your training and certification level",
       "point3": "Always consult a qualified professional for technical dive planning",
       "point4": "Calculations are provided for informational purposes and do not guarantee dive safety"
+    }
+  },
+  "analysis": {
+    "title": "Stop Analysis",
+    "empty": {
+      "title": "No profile to analyze",
+      "message": "Calculate a dive profile first to analyze tissue compartments and decompression stops."
     },
-    "education": {
+    "depthSelector": {
+      "title": "Select a depth to analyze",
+      "quickSelect": "Quick select"
+    },
+    "margins": {
+      "title": "Limiting Compartment",
+      "compartment": "Compartment",
+      "toleratedPressure": "Maximum Tolerated Pressure",
+      "toleratedDescription": "M-value adjusted by gradient factors",
+      "ambientPressure": "Current Ambient Pressure",
+      "atDepth": "at {depth}",
+      "margin": "Safety Margin",
+      "ceiling": "Ceiling (minimum depth)",
+      "ceilingDescription": "Minimum safe depth for this compartment",
+      "safeTitle": "✓ Safe Ascent",
+      "warningTitle": "⚠ Ascent Not Possible",
+      "safe": "Safe",
+      "caution": "Caution",
+      "danger": "Danger"
+    },
+    "chart": {
+      "title": "Tissue Compartment Saturation",
+      "safe": "Safe",
+      "caution": "Caution",
+      "danger": "Danger",
+      "limiting": "LIMITING",
+      "note": "The chart shows the saturation percentage of each compartment relative to its adjusted M-value. The compartment with the highest ceiling is the limiting compartment."
+    },
+    "table": {
+      "title": "Tissue Compartment Details",
+      "compartment": "Compartment",
+      "halfTime": "Half-time",
+      "tissuePressure": "Tissue Pressure",
+      "toleratedPressure": "Tolerated Pressure",
+      "margin": "Margin",
+      "ceiling": "Ceiling",
+      "saturation": "Saturation",
+      "status": "Status",
+      "limiting": "LIMITING",
+      "note": "This table displays detailed values for each tissue compartment. The limiting compartment determines the minimum depth to which you can safely ascend.",
+      "status": {
+        "safe": "Safe",
+        "caution": "Caution",
+        "danger": "Danger"
+      }
+    },
+    "showTable": "Show detailed table",
+    "hideTable": "Hide detailed table",
+    "info": {
+      "title": "About Stop Analysis",
+      "description": "This mode allows you to understand why certain decompression stops are necessary by analyzing tissue compartments.",
+      "point1": "Select any depth to see the state of compartments at that depth",
+      "point2": "The limiting compartment (with the highest ceiling) determines the minimum safe depth",
+      "point3": "Safety margins show how much additional pressure each compartment can tolerate"
+    }
+  },
+  "education": {
       "title": "Diving Concepts",
       "subtitle": "Understanding the fundamentals of decompression",
       "gradientFactorsSection": {
@@ -393,8 +456,7 @@
           "compare": "<strong>Comparison</strong>: Compare planned profile with actual profile to identify deviations"
         }
       }
-    }
-  },
+    },
   "airConsumption": {
     "title": "Air Consumption Management",
     "description": "Configure your air consumption and cylinders to estimate your dive autonomy",
@@ -717,6 +779,180 @@
     "export": {
       "button": "Export Comparison",
       "generating": "Generating..."
+    }
+  },
+  "repetitiveDive": {
+    "title": "Repetitive Dive Planner",
+    "subtitle": "Plan multiple dives per day safely",
+    "backButton": "Back",
+    "newPlan": "New Day",
+    "loadTemplate": "Load Template",
+    "currentPlan": {
+      "title": "Day Plan",
+      "date": "Date",
+      "diveCount": "Number of Dives",
+      "totalBottomTime": "Total Bottom Time",
+      "totalDecoTime": "Total Deco Time",
+      "maxDepth": "Maximum Depth",
+      "nitrogenLoad": "Nitrogen Load",
+      "pressureGroup": "Pressure Group",
+      "noFlyTime": "No-Fly Time",
+      "hours": "hours",
+      "minutes": "minutes"
+    },
+    "addDive": {
+      "title": "Add Dive",
+      "button": "Add Dive",
+      "diveNumber": "Dive #{number}",
+      "parameters": "Dive Parameters",
+      "surfaceInterval": "Surface Interval",
+      "recommended": "Recommended",
+      "minimum": "Minimum",
+      "optimal": "Optimal",
+      "calculate": "Calculate",
+      "add": "Add to Day",
+      "cancel": "Cancel"
+    },
+    "diveList": "Dive List",
+    "diveListSection": {
+      "title": "Day's Dives",
+      "empty": "No dives planned",
+      "emptyMessage": "Click 'Add Dive' to start your planning",
+      "dive": "Dive",
+      "depth": "Depth",
+      "time": "Time",
+      "gas": "Gas",
+      "interval": "Interval",
+      "pressureGroup": "Group",
+      "remove": "Remove",
+      "edit": "Edit"
+    },
+    "surfaceInterval": {
+      "title": "Surface Interval Calculator",
+      "description": "Calculate recommended surface interval between dives",
+      "currentLoad": "Current Nitrogen Load",
+      "targetGroup": "Target Group",
+      "results": {
+        "title": "Results",
+        "minimum": "Minimum Interval",
+        "recommended": "Recommended Interval",
+        "optimal": "Optimal Interval",
+        "desaturation": "Desaturation",
+        "afterInterval": "After Interval",
+        "pressureGroup": "Pressure Group"
+      }
+    },
+    "desaturation": {
+      "title": "Desaturation Curve",
+      "description": "Visualize residual nitrogen elimination over time",
+      "time": "Time (minutes)",
+      "load": "Nitrogen Load (%)",
+      "pressureGroup": "Pressure Group",
+      "controllingTissue": "Controlling Tissue"
+    },
+    "timeline": {
+      "title": "Day Timeline",
+      "dive": "Dive",
+      "surface": "Surface",
+      "now": "Now",
+      "completed": "Completed",
+      "planned": "Planned"
+    },
+    "templates": {
+      "title": "Day Templates",
+      "description": "Load a predefined template to start quickly",
+      "recreational": "Recreational",
+      "nitrox": "Nitrox",
+      "technical": "Technical",
+      "training": "Training",
+      "custom": "Custom",
+      "load": "Load",
+      "dives": "dives"
+    },
+    "depth": "Depth (m)",
+    "bottomTime": "Bottom Time (min)",
+    "gasType": "Gas Type",
+    "air": "Air",
+    "nitrox": "Nitrox",
+    "oxygenPercentage": "Oxygen Percentage (%)",
+    "addDiveButton": "Add Dive",
+    "currentStatus": "Current Status",
+    "totalDives": "Total Dives",
+    "totalBottomTime": "Total Bottom Time",
+    "maxDepth": "Max Depth",
+    "nitrogenLoad": "Nitrogen Load",
+    "pressureGroup": "Pressure Group",
+    "noFlyTime": "No-Fly Time",
+    "noDives": "No dives planned yet",
+    "addFirstDive": "Add your first dive to get started",
+    "dive": "Dive",
+    "removeDive": "Remove dive",
+    "tabs": {
+      "planner": "Planner",
+      "calculator": "Calculator",
+      "timeline": "Timeline"
+    },
+    "validation": {
+      "title": "Validation",
+      "canProceed": "Can Proceed",
+      "warnings": "Warnings",
+      "adjustedNDL": "Adjusted NDL",
+      "recommendedDepth": "Recommended Depth"
+    },
+    "warnings": {
+      "shortInterval": "Surface interval too short",
+      "reverseProfile": "Reverse profile - deeper dive second",
+      "highNitrogen": "High nitrogen load",
+      "tooManyDives": "Too many dives for one day",
+      "excessiveLoad": "Excessive nitrogen load",
+      "noFlyRisk": "Flight risk",
+      "extendedInterval": "Extended surface interval required"
+    },
+    "recommendations": {
+      "title": "Recommendations",
+      "restDay": "Consider a rest day tomorrow",
+      "longerInterval": "Increase surface interval",
+      "shallowerDive": "Dive shallower",
+      "shorterTime": "Reduce bottom time",
+      "moreConservative": "Use more conservative GFs"
+    },
+    "rules": {
+      "title": "Safety Rules",
+      "minInterval": "Minimum Interval",
+      "recommendedInterval": "Recommended Interval",
+      "maxDivesPerDay": "Max Dives/Day",
+      "maxDepthReduction": "Depth Reduction",
+      "noFlyTime": "No-Fly Time",
+      "edit": "Edit Rules",
+      "reset": "Reset",
+      "save": "Save"
+    },
+    "noFly": {
+      "title": "No-Fly Time",
+      "description": "Recommended waiting time before flying",
+      "singleDive": "Single Dive",
+      "multipleDives": "Multiple Dives",
+      "safeToFlyAt": "Safe to Fly At",
+      "controllingTissue": "Controlling Tissue",
+      "residualNitrogen": "Residual Nitrogen"
+    },
+    "export": {
+      "button": "Export Plan",
+      "pdf": "Export to PDF",
+      "text": "Export to Text",
+      "generating": "Generating..."
+    },
+    "complete": {
+      "button": "Complete Day",
+      "confirm": "Are you sure you want to complete this dive day?",
+      "success": "Dive day saved successfully"
+    },
+    "history": {
+      "title": "Day History",
+      "empty": "No saved days",
+      "view": "View",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this day?"
     }
   }
 }

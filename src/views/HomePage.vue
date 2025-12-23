@@ -96,6 +96,9 @@ function handleDiverInfoSave(data: any) {
               <path d="M10 2C5.6 2 2 5.6 2 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm-1-9h2v5h-2V7zm0 6h2v2h-2v-2z"/>
             </svg>
           </button>
+          <button class="cta-button test-button" @click="$router.push('/repetitive-dive-test')" title="Test - Plongées Répétitives">
+            <span class="button-text">🧪 Test Répétitives</span>
+          </button>
         </div>
         
         <div class="features">

@@ -12,6 +12,7 @@ import AirConsumptionResults from '../components/calculator/AirConsumptionResult
 import ModelSelector from '../components/comparison/ModelSelector.vue';
 import ComparisonResults from '../components/comparison/ComparisonResults.vue';
 import ComparisonChart from '../components/comparison/ComparisonChart.vue';
+import StopAnalysis from '../components/analysis/StopAnalysis.vue';
 import { calculateDiveProfile, calculateMultiLevelDiveProfile } from '../utils/buhlmann/decompression';
 import { calculateAirConsumption } from '../services/airConsumptionService';
 import { compareDecompressionModels, exportComparisonText } from '../services/modelComparisonService';
@@ -39,7 +40,7 @@ const airConsumptionData = ref<AirConsumptionData>({
 const airConsumptionResult = ref<AirConsumptionResult | null>(null);
 
 // Comparison state
-const activeTab = ref<'results' | 'comparison'>('results');
+const activeTab = ref<'results' | 'comparison' | 'analysis'>('results');
 const comparisonResult = ref<ComparisonResult | null>(null);
 const lastParameters = ref<DiveParameters | null>(null);
 
@@ -54,9 +55,11 @@ const handleCalculate = (parameters: DiveParameters | MultiLevelDiveParameters) 
     try {
       if (isMultiLevelDive(parameters)) {
         currentProfile.value = calculateMultiLevelDiveProfile(parameters);
+        // For multi-level dives, we can't use comparison yet, so clear lastParameters
+        lastParameters.value = null;
       } else {
         currentProfile.value = calculateDiveProfile(parameters);
-        // Store parameters for comparison (only simple dives supported for now)
+        // Store parameters for comparison
         lastParameters.value = parameters as DiveParameters;
       }
       
@@ -184,29 +187,63 @@ const handleExportComparison = () => {
           <!-- Right Column - Results -->
           <div class="cds--col-lg-12 cds--col-md-8 cds--col-sm-4">
             <!-- Tabs -->
-            <div class="tabs-container">
-              <div class="tabs-header">
-                <button
-                  class="tab-button"
-                  :class="{ 'tab-button--active': activeTab === 'results' }"
-                  @click="activeTab = 'results'"
-                >
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M3 3h14v2H3V3zm0 4h14v2H3V7zm0 4h14v2H3v-2zm0 4h10v2H3v-2z"/>
-                  </svg>
-                  <span>{{ t('results.title') }}</span>
-                </button>
-                <button
-                  class="tab-button"
-                  :class="{ 'tab-button--active': activeTab === 'comparison' }"
-                  @click="activeTab = 'comparison'"
-                  :disabled="!lastParameters"
-                >
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M3 3h6v6H3V3zm8 0h6v6h-6V3zM3 11h6v6H3v-6zm8 0h6v6h-6v-6z"/>
-                  </svg>
-                  <span>{{ t('comparison.title') }}</span>
-                </button>
+            <div class="cds--tabs cds--tabs--container">
+              <div class="cds--tab-content">
+                <ul class="cds--tabs__nav cds--tabs__nav--hidden" role="tablist">
+                  <li
+                    class="cds--tabs__nav-item"
+                    :class="{ 'cds--tabs__nav-item--selected': activeTab === 'results' }"
+                    role="presentation"
+                  >
+                    <button
+                      class="cds--tabs__nav-link"
+                      role="tab"
+                      type="button"
+                      @click="activeTab = 'results'"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right: 0.5rem;">
+                        <path d="M2 2h12v2H2V2zm0 4h12v2H2V6zm0 4h12v2H2v-2zm0 4h8v2H2v-2z"/>
+                      </svg>
+                      {{ t('results.title') }}
+                    </button>
+                  </li>
+                  <li
+                    class="cds--tabs__nav-item"
+                    :class="{ 'cds--tabs__nav-item--selected': activeTab === 'analysis', 'cds--tabs__nav-item--disabled': !currentProfile }"
+                    role="presentation"
+                  >
+                    <button
+                      class="cds--tabs__nav-link"
+                      role="tab"
+                      type="button"
+                      @click="activeTab = 'analysis'"
+                      :disabled="!currentProfile"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right: 0.5rem;">
+                        <path d="M14 2H2v12h12V2zM4 12V4h2v8H4zm3 0V4h2v8H7zm3 0V4h2v8h-2z"/>
+                      </svg>
+                      {{ t('analysis.title') }}
+                    </button>
+                  </li>
+                  <li
+                    class="cds--tabs__nav-item"
+                    :class="{ 'cds--tabs__nav-item--selected': activeTab === 'comparison', 'cds--tabs__nav-item--disabled': !lastParameters }"
+                    role="presentation"
+                  >
+                    <button
+                      class="cds--tabs__nav-link"
+                      role="tab"
+                      type="button"
+                      @click="activeTab = 'comparison'"
+                      :disabled="!lastParameters"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right: 0.5rem;">
+                        <path d="M2 2h5v5H2V2zm7 0h5v5H9V2zM2 9h5v5H2V9zm7 0h5v5H9V9z"/>
+                      </svg>
+                      {{ t('comparison.title') }}
+                    </button>
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -226,6 +263,11 @@ const handleExportComparison = () => {
 
               <!-- Chart -->
               <DiveProfileChart :profile="currentProfile" />
+            </div>
+
+            <!-- Analysis Tab -->
+            <div v-show="activeTab === 'analysis'">
+              <StopAnalysis :profile="currentProfile" />
             </div>
 
             <!-- Comparison Tab -->
@@ -626,62 +668,84 @@ const handleExportComparison = () => {
     padding: 1rem;
   }
 }
-</style>
-/* Tabs Styles */
-.tabs-container {
-  background: #fff;
-  border-radius: 4px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+/* Tabs Styles - IBM Carbon Design */
+.cds--tabs {
+  background: #ffffff;
+  margin-bottom: 1rem;
 }
 
-.tabs-header {
+.cds--tabs__nav {
   display: flex;
-  border-bottom: 2px solid #e0e0e0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #e0e0e0;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
-.tab-button {
-  flex: 1;
+.cds--tabs__nav-item {
   display: flex;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.cds--tabs__nav-item--selected {
+  border-bottom: 2px solid #0f62fe;
+}
+
+.cds--tabs__nav-item--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.cds--tabs__nav-link {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 1.5rem;
+  padding: 0.875rem 1rem;
+  border: 0;
   background: transparent;
-  border: none;
-  border-bottom: 3px solid transparent;
   color: #525252;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.28572;
+  text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-  bottom: -2px;
+  transition: all 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  white-space: nowrap;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
 }
 
-.tab-button:hover:not(:disabled) {
-  background-color: #f4f4f4;
+.cds--tabs__nav-link:hover {
+  background: #e5e5e5;
   color: #161616;
 }
 
-.tab-button:disabled {
-  opacity: 0.5;
+.cds--tabs__nav-link:focus {
+  outline: 2px solid #0f62fe;
+  outline-offset: -2px;
+}
+
+.cds--tabs__nav-item--selected .cds--tabs__nav-link {
+  color: #161616;
+  border-bottom: 2px solid #0f62fe;
+  font-weight: 600;
+}
+
+.cds--tabs__nav-link:disabled {
+  color: #c6c6c6;
   cursor: not-allowed;
-}
-
-.tab-button--active {
-  color: #0f62fe;
-  border-bottom-color: #0f62fe;
-  background-color: #fff;
-}
-
-.tab-button svg {
-  flex-shrink: 0;
 }
 
 .comparison-content {
   display: flex;
   flex-direction: column;
+}
+</style>
   gap: 1.5rem;
   margin-top: 1.5rem;
 }

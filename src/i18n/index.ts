@@ -30,6 +30,9 @@ const i18n = createI18n({
   legacy: false,
   locale: getSavedLocale(),
   fallbackLocale: 'en',
+  globalInjection: true,
+  missingWarn: false,
+  fallbackWarn: false,
   messages: {
     en,
     fr,

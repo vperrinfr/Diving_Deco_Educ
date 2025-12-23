@@ -240,8 +240,71 @@
       "point2": "Ne plongez jamais au-delà de votre niveau de formation et de certification",
       "point3": "Consultez toujours un professionnel qualifié pour la planification de plongées techniques",
       "point4": "Les calculs sont fournis à titre indicatif et ne garantissent pas la sécurité de la plongée"
+    }
+  },
+  "analysis": {
+    "title": "Analyse des paliers",
+    "empty": {
+      "title": "Aucun profil à analyser",
+      "message": "Calculez d'abord un profil de plongée pour analyser les compartiments tissulaires et les paliers de décompression."
     },
-    "education": {
+    "depthSelector": {
+      "title": "Sélectionnez une profondeur à analyser",
+      "quickSelect": "Sélection rapide"
+    },
+    "margins": {
+      "title": "Compartiment limitant",
+      "compartment": "Compartiment",
+      "toleratedPressure": "Pression tolérée maximale",
+      "toleratedDescription": "M-value ajusté par les gradient factors",
+      "ambientPressure": "Pression ambiante actuelle",
+      "atDepth": "à {depth}",
+      "margin": "Marge de sécurité",
+      "ceiling": "Plafond (profondeur minimale)",
+      "ceilingDescription": "Profondeur minimale sûre pour ce compartiment",
+      "safeTitle": "✓ Remontée sûre",
+      "warningTitle": "⚠ Remontée impossible",
+      "safe": "Sûr",
+      "caution": "Attention",
+      "danger": "Danger"
+    },
+    "chart": {
+      "title": "Saturation des compartiments tissulaires",
+      "safe": "Sûr",
+      "caution": "Attention",
+      "danger": "Danger",
+      "limiting": "LIMITANT",
+      "note": "Le graphique montre le pourcentage de saturation de chaque compartiment par rapport à sa M-value ajustée. Le compartiment avec le plafond le plus élevé est le compartiment limitant."
+    },
+    "table": {
+      "title": "Détails des compartiments tissulaires",
+      "compartment": "Compartiment",
+      "halfTime": "Demi-temps",
+      "tissuePressure": "Pression tissulaire",
+      "toleratedPressure": "Pression tolérée",
+      "margin": "Marge",
+      "ceiling": "Plafond",
+      "saturation": "Saturation",
+      "status": "Statut",
+      "limiting": "LIMITANT",
+      "note": "Ce tableau affiche les valeurs détaillées pour chaque compartiment tissulaire. Le compartiment limitant détermine la profondeur minimale à laquelle vous pouvez remonter en toute sécurité.",
+      "status": {
+        "safe": "Sûr",
+        "caution": "Attention",
+        "danger": "Danger"
+      }
+    },
+    "showTable": "Afficher le tableau détaillé",
+    "hideTable": "Masquer le tableau détaillé",
+    "info": {
+      "title": "À propos de l'analyse des paliers",
+      "description": "Ce mode vous permet de comprendre pourquoi certains paliers de décompression sont nécessaires en analysant les compartiments tissulaires.",
+      "point1": "Sélectionnez n'importe quelle profondeur pour voir l'état des compartiments à cette profondeur",
+      "point2": "Le compartiment limitant (avec le plafond le plus élevé) détermine la profondeur minimale sûre",
+      "point3": "Les marges de sécurité montrent combien de pression supplémentaire chaque compartiment peut tolérer"
+    }
+  },
+  "education": {
       "title": "Concepts de plongée",
       "subtitle": "Comprendre les principes fondamentaux de la décompression",
       "gradientFactorsSection": {
@@ -393,8 +456,7 @@
           "compare": "<strong>Comparaison</strong> : Comparez le profil planifié avec le profil réel pour identifier les écarts"
         }
       }
-    }
-  },
+    },
   "airConsumption": {
     "title": "Gestion de la consommation d'air",
     "description": "Configurez votre consommation d'air et vos bouteilles pour estimer l'autonomie de votre plongée",
@@ -717,6 +779,180 @@
     "export": {
       "button": "Exporter la Comparaison",
       "generating": "Génération..."
+    }
+  },
+  "repetitiveDive": {
+    "title": "Planificateur de plongées répétitives",
+    "subtitle": "Planifiez plusieurs plongées par jour en toute sécurité",
+    "backButton": "Retour",
+    "newPlan": "Nouvelle journée",
+    "loadTemplate": "Charger un modèle",
+    "currentPlan": {
+      "title": "Plan de la journée",
+      "date": "Date",
+      "diveCount": "Nombre de plongées",
+      "totalBottomTime": "Temps de fond total",
+      "totalDecoTime": "Temps de déco total",
+      "maxDepth": "Profondeur maximale",
+      "nitrogenLoad": "Charge azotée",
+      "pressureGroup": "Groupe de pression",
+      "noFlyTime": "Temps avant vol",
+      "hours": "heures",
+      "minutes": "minutes"
+    },
+    "addDive": {
+      "title": "Ajouter une plongée",
+      "button": "Ajouter une plongée",
+      "diveNumber": "Plongée n°{number}",
+      "parameters": "Paramètres de plongée",
+      "surfaceInterval": "Intervalle de surface",
+      "recommended": "Recommandé",
+      "minimum": "Minimum",
+      "optimal": "Optimal",
+      "calculate": "Calculer",
+      "add": "Ajouter à la journée",
+      "cancel": "Annuler"
+    },
+    "diveList": "Liste des plongées",
+    "diveListSection": {
+      "title": "Plongées de la journée",
+      "empty": "Aucune plongée planifiée",
+      "emptyMessage": "Cliquez sur 'Ajouter une plongée' pour commencer votre planification",
+      "dive": "Plongée",
+      "depth": "Profondeur",
+      "time": "Temps",
+      "gas": "Gaz",
+      "interval": "Intervalle",
+      "pressureGroup": "Groupe",
+      "remove": "Retirer",
+      "edit": "Modifier"
+    },
+    "surfaceInterval": {
+      "title": "Calculateur d'intervalle de surface",
+      "description": "Calculez l'intervalle de surface recommandé entre deux plongées",
+      "currentLoad": "Charge azotée actuelle",
+      "targetGroup": "Groupe cible",
+      "results": {
+        "title": "Résultats",
+        "minimum": "Intervalle minimum",
+        "recommended": "Intervalle recommandé",
+        "optimal": "Intervalle optimal",
+        "desaturation": "Désaturation",
+        "afterInterval": "Après l'intervalle",
+        "pressureGroup": "Groupe de pression"
+      }
+    },
+    "desaturation": {
+      "title": "Courbe de désaturation",
+      "description": "Visualisez l'élimination de l'azote résiduel au fil du temps",
+      "time": "Temps (minutes)",
+      "load": "Charge azotée (%)",
+      "pressureGroup": "Groupe de pression",
+      "controllingTissue": "Compartiment limitant"
+    },
+    "timeline": {
+      "title": "Timeline de la journée",
+      "dive": "Plongée",
+      "surface": "Surface",
+      "now": "Maintenant",
+      "completed": "Terminé",
+      "planned": "Planifié"
+    },
+    "templates": {
+      "title": "Modèles de journée",
+      "description": "Chargez un modèle prédéfini pour commencer rapidement",
+      "recreational": "Récréatif",
+      "nitrox": "Nitrox",
+      "technical": "Technique",
+      "training": "Formation",
+      "custom": "Personnalisé",
+      "load": "Charger",
+      "dives": "plongées"
+    },
+    "depth": "Profondeur (m)",
+    "bottomTime": "Temps de fond (min)",
+    "gasType": "Type de gaz",
+    "air": "Air",
+    "nitrox": "Nitrox",
+    "oxygenPercentage": "Pourcentage d'oxygène (%)",
+    "addDiveButton": "Ajouter la plongée",
+    "currentStatus": "État actuel",
+    "totalDives": "Nombre de plongées",
+    "totalBottomTime": "Temps de fond total",
+    "maxDepth": "Profondeur max",
+    "nitrogenLoad": "Charge azotée",
+    "pressureGroup": "Groupe de pression",
+    "noFlyTime": "Temps avant vol",
+    "noDives": "Aucune plongée planifiée pour le moment",
+    "addFirstDive": "Ajoutez votre première plongée pour commencer",
+    "dive": "Plongée",
+    "removeDive": "Retirer la plongée",
+    "tabs": {
+      "planner": "Planificateur",
+      "calculator": "Calculateur",
+      "timeline": "Timeline"
+    },
+    "validation": {
+      "title": "Validation",
+      "canProceed": "Peut continuer",
+      "warnings": "Avertissements",
+      "adjustedNDL": "NDL ajusté",
+      "recommendedDepth": "Profondeur recommandée"
+    },
+    "warnings": {
+      "shortInterval": "Intervalle de surface trop court",
+      "reverseProfile": "Profil inversé - plongée plus profonde en 2ème",
+      "highNitrogen": "Charge azotée élevée",
+      "tooManyDives": "Trop de plongées pour une journée",
+      "excessiveLoad": "Charge azotée excessive",
+      "noFlyRisk": "Risque pour le vol",
+      "extendedInterval": "Intervalle de surface prolongé requis"
+    },
+    "recommendations": {
+      "title": "Recommandations",
+      "restDay": "Envisagez un jour de repos demain",
+      "longerInterval": "Augmentez l'intervalle de surface",
+      "shallowerDive": "Plongez moins profond",
+      "shorterTime": "Réduisez le temps de fond",
+      "moreConservative": "Utilisez des GF plus conservateurs"
+    },
+    "rules": {
+      "title": "Règles de sécurité",
+      "minInterval": "Intervalle minimum",
+      "recommendedInterval": "Intervalle recommandé",
+      "maxDivesPerDay": "Plongées max/jour",
+      "maxDepthReduction": "Réduction profondeur",
+      "noFlyTime": "Temps avant vol",
+      "edit": "Modifier les règles",
+      "reset": "Réinitialiser",
+      "save": "Enregistrer"
+    },
+    "noFly": {
+      "title": "Temps avant vol",
+      "description": "Temps d'attente recommandé avant de prendre l'avion",
+      "singleDive": "Plongée unique",
+      "multipleDives": "Plongées multiples",
+      "safeToFlyAt": "Sûr de voler à",
+      "controllingTissue": "Compartiment limitant",
+      "residualNitrogen": "Azote résiduel"
+    },
+    "export": {
+      "button": "Exporter le plan",
+      "pdf": "Exporter en PDF",
+      "text": "Exporter en texte",
+      "generating": "Génération..."
+    },
+    "complete": {
+      "button": "Terminer la journée",
+      "confirm": "Êtes-vous sûr de vouloir terminer cette journée de plongée ?",
+      "success": "Journée de plongée enregistrée avec succès"
+    },
+    "history": {
+      "title": "Historique des journées",
+      "empty": "Aucune journée enregistrée",
+      "view": "Voir",
+      "delete": "Supprimer",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette journée ?"
     }
   }
 }
