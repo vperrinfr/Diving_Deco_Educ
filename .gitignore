@@ -38,3 +38,8 @@ security-audit.json
 
 # Railway
 .railway
+
+# Docker
+*.tar.gz
+Container/.env
+Container/diver-data-backup.tar.gz

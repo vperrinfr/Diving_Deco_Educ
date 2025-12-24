@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: ..
+      dockerfile: Container/Dockerfile.backend
+    container_name: decompression-calculator-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - ALLOWED_ORIGINS=http://localhost,http://localhost:80,http://frontend
+    volumes:
+      # Persist diver.env file
+      - diver-data:/app/data
+      # Mount diver.env to root directory for compatibility
+      - diver-data:/app/diver.env:ro
+    networks:
+      - decompression-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/api/diver-info"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ..
+      dockerfile: Container/Dockerfile.frontend
+    container_name: decompression-calculator-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - decompression-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+networks:
+  decompression-network:
+    driver: bridge
+
+volumes:
+  diver-data:
+    driver: local
+
+# Made with Bob
